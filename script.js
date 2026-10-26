@@ -20,6 +20,9 @@
           <a href="#about">About</a>
           <a href="#contact">Contact</a>
         </nav>
+        <a href="product.html" class="cart-link" aria-label="View cart">
+          Cart <span id="cart-count">0</span>
+        </a>
       </div>
     </header>
 
@@ -72,7 +75,7 @@
             <a class="design-card" href="designs/1960s-carnaby.html"><span class="card-label">1960s</span><h3>Carnaby Mod</h3><p>Pop art, sharp lines, youthful energy.</p></a>
             <a class="design-card" href="designs/1960s-riviera.html"><span class="card-label">1960s</span><h3>French Riviera</h3><p>Sunlit tailoring and coastal ease.</p></a>
             <a class="design-card" href="designs/1960s-hippie.html"><span class="card-label">1960s</span><h3>Hippie Folk</h3><p>Earth tones and freeform bohemian softness.</p></a>
-            <a class="design-card" href="designs/1970s-disco.html"><span class="card-label">1970s</span><h3>Soul & Disco</h3><p>Velvet warmth and after-hours rhythm.</p></a>
+            <a class="design-card" href="designs/1970s-disco.html"><span class="card-label">1970s</span><h3>Soul &amp; Disco</h3><p>Velvet warmth and after-hours rhythm.</p></a>
             <a class="design-card" href="designs/1970s-punk.html"><span class="card-label">1977</span><h3>Punk Fanzine</h3><p>Chaotic rebellion and safety-pin edge.</p></a>
             <a class="design-card" href="designs/1970s-desert-disco.html"><span class="card-label">1970s</span><h3>Desert Disco</h3><p>Sunset glam and desert heat.</p></a>
             <a class="design-card" href="designs/1980s-miami-vice.html"><span class="card-label">1980s</span><h3>Miami Vice</h3><p>Pastel power and coastal sheen.</p></a>
