@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:wght@600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="styles.css" />
   </head>
-  <body class="home-body">
+  <body data-page="home">
     <header class="site-header">
       <div class="container nav-wrap">
         <a href="index.html" class="brand">Vintage Archive</a>
@@ -20,7 +20,7 @@
           <a href="#about">About</a>
           <a href="#contact">Contact</a>
         </nav>
-        <a href="product.html" class="cart-link" aria-label="View cart">
+        <a href="cart.html" class="cart-link" aria-label="View cart">
           Cart <span id="cart-count">0</span>
         </a>
       </div>
@@ -99,6 +99,11 @@
           <div class="section-heading product-header">
             <span class="eyebrow">Shop the archive</span>
             <h2>Dummy products from every era</h2>
+          </div>
+          <div class="shop-filters" aria-label="Product filters">
+            <button type="button" class="filter-btn active" data-filter="all">All</button>
+            <button type="button" class="filter-btn" data-filter="hoodie">Hoodies</button>
+            <button type="button" class="filter-btn" data-filter="t-shirt">T-shirts</button>
           </div>
           <div id="product-grid" class="product-grid" aria-live="polite"></div>
         </div>

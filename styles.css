@@ -1,821 +1,360 @@
-:root {
-  --bg: #0d0d11;
-  --bg-soft: #17181d;
-  --panel: rgba(255,255,255,0.04);
-  --panel-strong: rgba(255,255,255,0.08);
-  --line: rgba(255,255,255,0.12);
-  --text: #f7f7f4;
-  --muted: #b7b7b2;
-  --accent: #d8a15e;
-  --accent-2: #b76e65;
-  --shadow: rgba(0,0,0,0.25);
+const designPages = [
+  { name: 'Art Nouveau', slug: '1890s-art-nouveau.html' },
+  { name: 'Edwardian', slug: '1900s-edwardian.html' },
+  { name: 'WWI Utility', slug: '1910s-utility.html' },
+  { name: 'Bauhaus Modern', slug: '1920s-bauhaus.html' },
+  { name: 'Constructivism', slug: '1920s-constructivism.html' },
+  { name: 'Broadsheet', slug: '1930s-broadsheet.html' },
+  { name: 'Art Deco', slug: '1930s-deco.html' },
+  { name: 'Workwear', slug: '1940s-workwear.html' },
+  { name: 'Noir Studio', slug: '1940s-noir.html' },
+  { name: 'Palm Springs', slug: '1950s-palm-springs.html' },
+  { name: 'Rockabilly', slug: '1950s-rockabilly.html' },
+  { name: 'Americana', slug: '1950s-americana.html' },
+  { name: 'Carnaby Mod', slug: '1960s-carnaby.html' },
+  { name: 'French Riviera', slug: '1960s-riviera.html' },
+  { name: 'Hippie Folk', slug: '1960s-hippie.html' },
+  { name: 'Soul & Disco', slug: '1970s-disco.html' },
+  { name: 'Punk Fanzine', slug: '1970s-punk.html' },
+  { name: 'Desert Disco', slug: '1970s-desert-disco.html' },
+  { name: 'Miami Vice', slug: '1980s-miami-vice.html' },
+  { name: 'Synthwave', slug: '1980s-synthwave.html' },
+  { name: 'Streetwear', slug: '1980s-streetwear.html' },
+  { name: 'Grunge', slug: '1990s-grunge.html' },
+  { name: 'Minimalism', slug: '1990s-minimal.html' },
+  { name: 'Indie Sleaze', slug: '2000s-indie-sleaze.html' },
+  { name: 'Y2K Glow', slug: '2000s-y2k.html' },
+  { name: 'Minimal Luxury', slug: '2010s-luxury.html' },
+  { name: 'Nordic Minimal', slug: '2010s-nordic.html' },
+  { name: 'Quiet Luxury', slug: '2020s-quiet-luxury.html' },
+  { name: 'Dark Academia', slug: '2020s-dark-academia.html' },
+  { name: 'Hyperpop', slug: '2020s-hyperpop.html' }
+];
+
+const productCatalog = [
+  { id: 'rosewood-hoodie', era: 'Art Nouveau', name: 'Rosewood Hoodie', type: 'Hoodie', price: 78, tag: 'Best seller', palette: ['#f4ecd9', '#c7897d', '#1d2b22'], copy: 'Oversized cotton fleece with botanical embroidery and gold cord trim.', summary: 'A soft, elevated hoodie shaped for layered vintage styling and evening warmth.' },
+  { id: 'pearl-tee', era: 'Edwardian', name: 'Pearl Tee', type: 'T-shirt', price: 42, tag: 'New', palette: ['#f7efe6', '#d9c4a2', '#af6f62'], copy: 'A clean, refined tee with lace-inspired texture and a tailored silhouette.', summary: 'Lightweight and elegant, designed to anchor a dressier archival outfit.' },
+  { id: 'steelline-hoodie', era: 'Bauhaus Modern', name: 'Steelline Hoodie', type: 'Hoodie', price: 86, tag: 'Trending', palette: ['#dfe5ea', '#a8b2b7', '#2a2e33'], copy: 'Structured masking, crisp lines, and a muted monochrome finish.', summary: 'Built for sharp silhouettes and functional layering with a modern edge.' },
+  { id: 'gilded-tee', era: 'Art Deco', name: 'Gilded Tee', type: 'T-shirt', price: 45, tag: 'Limited', palette: ['#f4dca9', '#d1a65d', '#2d2a36'], copy: 'A luminous graphic tee with geometric detailing and metallic-inspired contrast.', summary: 'Minimal but dramatic, styled to catch the light in every frame.' },
+  { id: 'field-canvas-hoodie', era: 'Workwear', name: 'Field Canvas Hoodie', type: 'Hoodie', price: 74, tag: 'Utility', palette: ['#d5d0bc', '#6c655d', '#3a3b35'], copy: 'A rugged fleece layer built for movement and all-day wear.', summary: 'Relaxed and durable with honest texture and practical detail.' },
+  { id: 'sunline-tee', era: 'Palm Springs', name: 'Sunline Tee', type: 'T-shirt', price: 38, tag: 'Fresh', palette: ['#f4dfe4', '#d998a6', '#f2c67d'], copy: 'A bright citrus tone tee for easy layering and warm-weather styling.', summary: 'Soft and relaxed with a sunny finish that suits low-key weekend dressing.' },
+  { id: 'diner-denim-hoodie', era: 'Rockabilly', name: 'Diner Denim Hoodie', type: 'Hoodie', price: 82, tag: 'Classic', palette: ['#d7d8d1', '#c86f4e', '#1b1b1d'], copy: 'Utility denim texture, vintage wash, and a casual easy silhouette.', summary: 'A throwback layer built for movement, attitude, and everyday edge.' },
+  { id: 'mod-stripe-tee', era: 'Carnaby Mod', name: 'Mod Stripe Tee', type: 'T-shirt', price: 34, tag: 'New drop', palette: ['#f7f7f7', '#ff6b57', '#2e2a52'], copy: 'High-contrast stripes built with a sharp and playful retro attitude.', summary: 'Lightweight and graphic, made to stand out in layered mod styling.' },
+  { id: 'after-hours-hoodie', era: 'Soul & Disco', name: 'After Hours Hoodie', type: 'Hoodie', price: 90, tag: 'Hot', palette: ['#d8b9a0', '#8d3c4a', '#1a1c2b'], copy: 'Velvet-inspired depth and soft lining for dramatic night styling.', summary: 'Warm tones and comfortable volume create an unmistakably after-dark finish.' },
+  { id: 'coastal-tee', era: 'Miami Vice', name: 'Coastal Tee', type: 'T-shirt', price: 36, tag: 'Editorial', palette: ['#cfe4f2', '#ff7b72', '#2b4f7a'], copy: 'Pastel print graphic with a glossy, coastal-inspired finish.', summary: 'Clean-cut and bright, designed for layered combinations and easy statement dressing.' },
+  { id: 'neon-grid-hoodie', era: 'Synthwave', name: 'Neon Grid Hoodie', type: 'Hoodie', price: 88, tag: 'Trending', palette: ['#1a1236', '#ff4fd8', '#4dd9ff'], copy: 'A vivid hoodie with a soft knit finish and arcade-inspired graphics.', summary: 'Built for neon layering and late-night creative energy.' },
+  { id: 'ragged-tee', era: 'Grunge', name: 'Ragged Tee', type: 'T-shirt', price: 40, tag: 'Back-in-stock', palette: ['#cf8d72', '#3d3f43', '#b9ab9f'], copy: 'Broken-in softness and textured fabric for an effortless worn-in vibe.', summary: 'Easy and expressive, perfectly suited to layered silhouettes and texture play.' },
+  { id: 'quiet-hoodie', era: 'Minimal Luxury', name: 'Quiet Hoodie', type: 'Hoodie', price: 84, tag: 'Editor pick', palette: ['#dfd8cf', '#7a7268', '#181b1f'], copy: 'A refined fleece layer with a pared-back finish and elevated essentials feel.', summary: 'Simple but elevated, made to fit into a quiet, polished wardrobe.' },
+  { id: 'cashmere-tee', era: 'Quiet Luxury', name: 'Cashmere Tee', type: 'T-shirt', price: 52, tag: 'Capsule', palette: ['#e6dfd8', '#b4a292', '#3b3d3a'], copy: 'Soft, tactile, and pared-back with an understated premium finish.', summary: 'Lightweight luxury with a minimal silhouette and elevated everyday comfort.' },
+  { id: 'color-burst-hoodie', era: 'Hyperpop', name: 'Color Burst Hoodie', type: 'Hoodie', price: 76, tag: 'Playful', palette: ['#ff5ca8', '#6d8cff', '#fce95a'], copy: 'A vivid expression piece designed for loud layering and digital-era color.', summary: 'Built to stand out in a saturated, graphic wardrobe.' },
+  { id: 'studio-tee', era: 'Dark Academia', name: 'Studio Tee', type: 'T-shirt', price: 41, tag: 'Classic', palette: ['#d8d1c8', '#7f6d5a', '#2f343a'], copy: 'A refined tee in deep earth tones with a vintage academic mood.', summary: 'A sleek, bookish staple that works for low-key layering and contrast.' }
+];
+
+const CART_KEY = 'vintage-archive-cart';
+let activeFilter = 'all';
+
+function normalizeType(value) {
+  return String(value).toLowerCase().replace(/\s+/g, '-');
 }
 
-* { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-body {
-  margin: 0;
-  font-family: 'Inter', sans-serif;
-  background: linear-gradient(180deg, #0d0d11 0%, #101318 100%);
-  color: var(--text);
-}
-a { color: inherit; text-decoration: none; }
-img { max-width: 100%; display: block; }
-.container {
-  width: min(1180px, calc(100% - 32px));
-  margin: 0 auto;
-}
-.site-header {
-  position: sticky;
-  top: 0;
-  z-index: 20;
-  backdrop-filter: blur(16px);
-  background: rgba(13, 14, 17, 0.82);
-  border-bottom: 1px solid var(--line);
-}
-.nav-wrap {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  min-height: 72px;
-  gap: 18px;
-}
-.brand {
-  font-size: 1.1rem;
-  font-weight: 900;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
-.top-nav {
-  display: flex;
-  align-items: center;
-  gap: 18px;
-  color: var(--muted);
-  font-size: 0.85rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-}
-.top-nav a:hover { color: var(--text); }
-.cart-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 12px;
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  background: rgba(255,255,255,0.02);
-  color: var(--text);
-  font-size: 0.8rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-#cart-count {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 22px;
-  min-height: 22px;
-  border-radius: 999px;
-  background: linear-gradient(135deg, var(--accent), var(--accent-2));
-  color: #111;
-  font-weight: 800;
-}
-
-.hero {
-  padding: 88px 0 54px;
-}
-.hero-grid {
-  display: grid;
-  grid-template-columns: 1.3fr 0.7fr;
-  gap: 32px;
-  align-items: center;
-}
-.eyebrow {
-  display: inline-block;
-  padding: 8px 12px;
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  background: rgba(255,255,255,0.03);
-  color: var(--accent);
-  font-size: 0.72rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  font-weight: 700;
-}
-h1, h2, h3 {
-  margin: 0;
-  font-weight: 800;
-}
-h1 {
-  font-size: clamp(2.6rem, 4vw, 5rem);
-  line-height: 0.94;
-  margin-top: 18px;
-  letter-spacing: -0.05em;
-}
-h2 {
-  font-size: clamp(2rem, 3vw, 3rem);
-  letter-spacing: -0.04em;
-}
-.hero p,
-.about-box p,
-.contact-box p,
-.design-card p,
-.product-card p,
-.detail-panel p,
-.product-summary,
-.product-subtitle {
-  color: var(--muted);
-  line-height: 1.7;
-}
-.hero p {
-  font-size: 1.04rem;
-  max-width: 640px;
-  margin-top: 18px;
-}
-.hero-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-top: 26px;
-}
-.button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 14px 20px;
-  border-radius: 12px;
-  border: 1px solid var(--line);
-  font-weight: 700;
-  transition: 180ms ease;
-}
-.button:hover { transform: translateY(-1px); }
-.button.primary {
-  background: linear-gradient(135deg, var(--accent), var(--accent-2));
-  color: #111;
-  border-color: transparent;
-  box-shadow: 0 18px 30px rgba(184,110,101,0.25);
-}
-.button.ghost {
-  background: rgba(255,255,255,0.02);
-}
-.hero-panel {
-  display: flex;
-  justify-content: center;
-}
-.panel-card {
-  width: min(100%, 340px);
-  background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01));
-  border: 1px solid var(--line);
-  border-radius: 24px;
-  padding: 26px;
-  box-shadow: 0 30px 80px var(--shadow);
-}
-.mini-tag {
-  display: inline-block;
-  font-size: 0.68rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 16px;
-}
-.panel-card h3 {
-  font-size: 1.8rem;
-  margin-bottom: 10px;
-}
-.panel-card p {
-  margin: 0;
-  color: var(--muted);
-}
-
-.section {
-  padding: 78px 0;
-}
-.section-alt {
-  background: rgba(255,255,255,0.02);
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
-}
-.section-heading {
-  margin-bottom: 28px;
-}
-.design-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 18px;
-}
-.design-card {
-  display: block;
-  background: rgba(255,255,255,0.03);
-  border: 1px solid var(--line);
-  border-radius: 22px;
-  padding: 22px 18px;
-  transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
-  box-shadow: 0 12px 28px var(--shadow);
-}
-.design-card:hover {
-  transform: translateY(-2px);
-  border-color: rgba(255,255,255,0.22);
-  background: rgba(255,255,255,0.05);
-}
-.card-label {
-  display: inline-block;
-  color: var(--accent);
-  font-size: 0.72rem;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  margin-bottom: 12px;
-}
-.design-card h3 {
-  font-size: 1.5rem;
-  margin-bottom: 8px;
-}
-.design-card p {
-  margin: 0;
-}
-
-.product-section {
-  padding: 78px 0 20px;
-}
-.product-header {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-.product-grid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 18px;
-}
-.product-card {
-  background: rgba(255,255,255,0.03);
-  border: 1px solid var(--line);
-  border-radius: 22px;
-  overflow: hidden;
-  box-shadow: 0 16px 36px rgba(0,0,0,0.18);
-  transition: transform 180ms ease, border-color 180ms ease;
-}
-.product-card:hover {
-  transform: translateY(-2px);
-  border-color: rgba(255,255,255,0.22);
-}
-.product-visual {
-  height: 220px;
-  border-bottom: 1px solid rgba(255,255,255,0.12);
-}
-.product-visual.large {
-  min-height: 420px;
-  width: min(100%, 520px);
-  border-radius: 24px;
-  border: 1px solid var(--line);
-}
-.product-body {
-  padding: 18px;
-}
-.product-meta,
-.product-footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 12px;
-}
-.product-tag {
-  display: inline-flex;
-  align-items: center;
-  padding: 6px 8px;
-  border-radius: 999px;
-  background: rgba(255,255,255,0.06);
-  color: var(--accent);
-  font-size: 0.65rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  font-weight: 700;
-}
-.product-price {
-  font-size: 1.15rem;
-  font-weight: 800;
-  color: var(--text);
-}
-.product-card h3 {
-  margin-top: 16px;
-  font-size: 1.3rem;
-}
-.product-card p {
-  margin: 10px 0 16px;
-  min-height: 72px;
-  font-size: 0.94rem;
-}
-.product-footer {
-  border-top: 1px solid var(--line);
-  padding-top: 12px;
-  color: var(--muted);
-  font-size: 0.76rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-.product-actions {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-.inline-link {
-  color: var(--text);
-  text-decoration: underline;
-  text-underline-offset: 2px;
-  font-size: 0.72rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-.add-to-cart {
-  appearance: none;
-  border: 1px solid var(--line);
-  background: rgba(255,255,255,0.04);
-  color: var(--text);
-  border-radius: 999px;
-  padding: 9px 12px;
-  font-weight: 700;
-  font-size: 0.72rem;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  cursor: pointer;
-}
-.add-to-cart.big {
-  padding: 12px 18px;
-  font-size: 0.8rem;
-}
-.add-to-cart:hover {
-  background: rgba(255,255,255,0.09);
-}
-.add-to-cart:disabled {
-  opacity: 0.82;
-  cursor: default;
-}
-
-.product-page {
-  padding: 52px 0 80px;
-}
-.product-page-shell {
-  background: rgba(255,255,255,0.04);
-  border: 1px solid var(--line);
-  border-radius: 28px;
-  padding: 28px;
-}
-.product-hero {
-  display: grid;
-  grid-template-columns: 1.1fr 1fr;
-  gap: 28px;
-  align-items: center;
-}
-.product-details h1 {
-  margin-top: 14px;
-  font-size: clamp(2.4rem, 5vw, 4.4rem);
-}
-.product-subtitle {
-  margin: 14px 0;
-  font-size: 0.9rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
-.product-summary {
-  margin: 0;
-  font-size: 1.04rem;
-}
-.detail-price-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-  padding: 18px 0;
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
-  margin-top: 24px;
-}
-.detail-meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
-  margin-top: 18px;
-  color: var(--muted);
-  font-size: 0.8rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-.product-info-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 20px;
-  margin-top: 32px;
-}
-.detail-panel {
-  background: rgba(255,255,255,0.02);
-  border: 1px solid var(--line);
-  border-radius: 22px;
-  padding: 22px;
-}
-.detail-panel h2 {
-  margin-bottom: 12px;
-  font-size: 1.3rem;
-}
-.detail-panel p {
-  margin: 0;
-}
-.swatch-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0,1fr));
-  gap: 12px;
-}
-.swatch {
-  border-radius: 16px;
-  border: 1px solid var(--line);
-  padding: 14px;
-  min-height: 92px;
-  display: flex;
-  align-items: end;
-  font-size: 0.75rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  font-weight: 700;
-}
-.related-products {
-  margin-top: 32px;
-}
-.related-products h2 {
-  margin-bottom: 18px;
-}
-.related-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 18px;
-}
-.mini-product {
-  display: grid;
-  grid-template-columns: 120px 1fr;
-  gap: 16px;
-  background: rgba(255,255,255,0.03);
-  border: 1px solid var(--line);
-  border-radius: 18px;
-  padding: 16px;
-}
-.mini-visual {
-  min-height: 120px;
-  border-radius: 14px;
-  border: 1px solid var(--line);
-}
-.mini-product h3 {
-  font-size: 1.1rem;
-}
-.mini-product p {
-  color: var(--muted);
-  margin: 8px 0;
-}
-.mini-product a {
-  color: var(--accent);
-  font-size: 0.8rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.about-box,
-.contact-box {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 28px;
-  align-items: center;
-}
-.contact-section {
-  padding-bottom: 110px;
-}
-.site-footer {
-  border-top: 1px solid var(--line);
-  background: rgba(255,255,255,0.015);
-}
-.footer-row {
-  display: flex;
-  justify-content: space-between;
-  gap: 16px;
-  padding: 20px 0 30px;
-  color: var(--muted);
-  font-size: 0.8rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.design-page {
-  min-height: 100vh;
-  padding: 56px 0 80px;
-}
-.page-shell {
-  background: rgba(255,255,255,0.04);
-  border: 1px solid var(--line);
-  border-radius: 28px;
-  overflow: hidden;
-  box-shadow: 0 24px 60px rgba(0,0,0,0.22);
-}
-.page-top {
-  padding: 32px 32px 18px;
-  border-bottom: 1px solid var(--line);
-}
-.page-top .top-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 20px;
-  flex-wrap: wrap;
-}
-.page-badge {
-  display: inline-flex;
-  align-items: center;
-  border-radius: 999px;
-  padding: 8px 12px;
-  font-size: 0.7rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  border: 1px solid var(--line);
-  background: rgba(255,255,255,0.03);
-  color: var(--text);
-}
-.page-top h1 {
-  font-size: clamp(2.2rem, 4vw, 4.6rem);
-  margin-top: 18px;
-}
-.page-top p {
-  color: var(--muted);
-  max-width: 780px;
-  margin-top: 10px;
-  line-height: 1.7;
-}
-.page-body {
-  display: grid;
-  grid-template-columns: 1.2fr 0.8fr;
-  gap: 30px;
-  padding: 32px;
-}
-.story-block,
-.palette-box {
-  background: rgba(255,255,255,0.02);
-  border: 1px solid var(--line);
-  border-radius: 22px;
-  padding: 24px;
-}
-.story-block h3,
-.palette-box h3 {
-  margin-bottom: 14px;
-  font-size: 1.25rem;
-}
-.story-block p,
-.palette-box p {
-  color: var(--muted);
-  line-height: 1.75;
-  margin: 0;
-}
-.collection-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 18px;
-  margin-top: 30px;
-}
-.collection-item {
-  background: rgba(255,255,255,0.03);
-  border: 1px solid var(--line);
-  border-radius: 18px;
-  padding: 18px;
-}
-.collection-item .thumb {
-  width: 100%;
-  height: 170px;
-  border-radius: 14px;
-  margin-bottom: 16px;
-  border: 1px solid rgba(255,255,255,0.12);
-}
-.collection-item h4 {
-  margin: 0 0 8px;
-  font-size: 1.1rem;
-}
-.collection-item p {
-  margin: 0;
-  color: var(--muted);
-  line-height: 1.65;
-}
-.back-link {
-  display: inline-flex;
-  margin-top: 20px;
-  padding: 11px 16px;
-  border-radius: 10px;
-  border: 1px solid var(--line);
-  background: rgba(255,255,255,0.02);
-}
-
-@media (max-width: 900px) {
-  .hero-grid,
-  .about-box,
-  .contact-box,
-  .page-body,
-  .product-page-shell,
-  .product-hero,
-  .product-info-grid,
-  .product-grid {
-    grid-template-columns: 1fr;
-  }
-  .design-grid,
-  .collection-grid,
-  .related-grid {
-    grid-template-columns: repeat(2, minmax(0,1fr));
-  }
-}
-@media (max-width: 640px) {
-  .top-nav {
-    display: none;
-  }
-  .design-grid,
-  .collection-grid,
-  .product-grid,
-  .related-grid {
-    grid-template-columns: 1fr;
-  }
-  .page-top,
-  .page-body,
-  .product-page-shell {
-    padding-left: 20px;
-    padding-right: 20px;
-  }
-  .footer-row,
-  .detail-price-row,
-  .product-meta,
-  .product-footer {
-    flex-direction: column;
-    align-items: flex-start;
+function getCart() {
+  try {
+    return JSON.parse(localStorage.getItem(CART_KEY) || '[]');
+  } catch (error) {
+    return [];
   }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+function setCart(cart) {
+  localStorage.setItem(CART_KEY, JSON.stringify(cart));
+  updateCartCount();
+}
+
+function getProductById(productId) {
+  return productCatalog.find((product) => product.id === productId) || productCatalog[0];
+}
+
+function updateCartCount() {
+  const countEl = document.querySelector('#cart-count');
+  if (!countEl) return;
+  const cart = getCart();
+  const totalItems = cart.reduce((sum, item) => sum + Number(item.quantity || 0), 0);
+  countEl.textContent = String(totalItems);
+}
+
+function addToCart(productId, quantity = 1) {
+  const cart = getCart();
+  const existingItem = cart.find((item) => item.productId === productId);
+
+  if (existingItem) {
+    existingItem.quantity += quantity;
+  } else {
+    cart.push({ productId, quantity });
+  }
+
+  setCart(cart);
+}
+
+function adjustCartQuantity(productId, delta) {
+  const cart = getCart();
+  const existingItem = cart.find((item) => item.productId === productId);
+  if (!existingItem) return;
+
+  existingItem.quantity += delta;
+
+  if (existingItem.quantity <= 0) {
+    const nextCart = cart.filter((item) => item.productId !== productId);
+    setCart(nextCart);
+    if (document.body.dataset.page === 'cart') {
+      renderCartPage();
+    }
+    return;
+  }
+
+  setCart(cart);
+  if (document.body.dataset.page === 'cart') {
+    renderCartPage();
+  }
+}
+
+function removeFromCart(productId) {
+  const cart = getCart().filter((item) => item.productId !== productId);
+  setCart(cart);
+  if (document.body.dataset.page === 'cart') {
+    renderCartPage();
+  }
+}
+
+function priceString(value) {
+  return `$${Number(value).toFixed(0)}`;
+}
+
+function formatPrice(value) {
+  return priceString(value);
+}
+
+function renderProductCards() {
+  const productGrid = document.querySelector('#product-grid');
+  if (!productGrid) return;
+
+  const filteredProducts = productCatalog.filter((product) => {
+    if (activeFilter === 'all') return true;
+    return normalizeType(product.type) === activeFilter;
+  });
+
+  productGrid.innerHTML = filteredProducts.map((item) => {
+    const [first, second, third] = item.palette;
+    return `
+      <article class="product-card">
+        <div class="product-visual" style="background: linear-gradient(135deg, ${first} 0%, ${second} 52%, ${third} 100%);"></div>
+        <div class="product-body">
+          <div class="product-meta">
+            <span class="product-tag">${item.tag}</span>
+            <span class="product-price">${formatPrice(item.price)}</span>
+          </div>
+          <h3>${item.name}</h3>
+          <p>${item.copy}</p>
+          <div class="product-footer">
+            <span>${item.type} · ${item.era}</span>
+            <div class="product-actions">
+              <a href="product.html?id=${item.id}" class="inline-link">View</a>
+              <button type="button" class="add-to-cart" data-add-to-cart="${item.id}">Add</button>
+            </div>
+          </div>
+        </div>
+      </article>
+    `;
+  }).join('');
+}
+
+function renderProductPage() {
+  const detailRoot = document.querySelector('#product-detail');
+  if (!detailRoot) return;
+
+  const params = new URLSearchParams(window.location.search);
+  const productId = params.get('id') || productCatalog[0].id;
+  const product = getProductById(productId);
+  const [first, second, third] = product.palette;
+  const related = productCatalog.filter((item) => item.id !== product.id && item.era === product.era).slice(0, 2);
+
+  detailRoot.innerHTML = `
+    <div class="product-page-shell">
+      <div class="product-hero">
+        <div class="product-visual large" style="background: linear-gradient(135deg, ${first} 0%, ${second} 52%, ${third} 100%);"></div>
+        <div class="product-details">
+          <span class="product-tag">${product.tag}</span>
+          <h1>${product.name}</h1>
+          <p class="product-subtitle">${product.type} · ${product.era}</p>
+          <p class="product-summary">${product.summary}</p>
+          <div class="detail-price-row">
+            <span class="product-price">${formatPrice(product.price)}</span>
+            <button type="button" class="add-to-cart big" data-add-to-cart="${product.id}">Add to cart</button>
+          </div>
+          <div class="detail-meta">
+            <span>Sizes: S - XXL</span>
+            <span>Fabric: premium cotton</span>
+            <span>Made in archive studio</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-info-grid">
+        <div class="detail-panel">
+          <h2>Story</h2>
+          <p>${product.copy}</p>
+        </div>
+        <div class="detail-panel">
+          <h2>Palette</h2>
+          <div class="swatch-grid">
+            <div class="swatch" style="background:${first}; color:${third};">${product.era}</div>
+            <div class="swatch" style="background:${second}; color:#fff;">Accent</div>
+            <div class="swatch" style="background:${third}; color:#f7f7f4;">Ground</div>
+            <div class="swatch" style="background:#f7f7f4; color:#111;">Base</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="related-products">
+        <h2>More from ${product.era}</h2>
+        <div class="related-grid">
+          ${related.length ? related.map((item) => `
+            <article class="mini-product">
+              <div class="mini-visual" style="background: linear-gradient(135deg, ${item.palette[0]} 0%, ${item.palette[1]} 52%, ${item.palette[2]} 100%);"></div>
+              <div>
+                <h3>${item.name}</h3>
+                <p>${item.type}</p>
+                <a href="product.html?id=${item.id}">View product</a>
+              </div>
+            </article>
+          `).join('') : '<p>No related products yet.</p>'}
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function renderCartPage() {
+  const cartRoot = document.querySelector('#cart-root');
+  if (!cartRoot) return;
+
+  const cartItems = getCart();
+  if (!cartItems.length) {
+    cartRoot.innerHTML = `
+      <div class="cart-empty">
+        <h1>Your cart is empty</h1>
+        <p>Add a hoodie or tee from the archive storefront.</p>
+        <a href="index.html#shop" class="button primary">Continue shopping</a>
+      </div>
+    `;
+    return;
+  }
+
+  const items = cartItems.map((entry) => {
+    const product = getProductById(entry.productId);
+    return {
+      ...entry,
+      product,
+      lineTotal: Number(product.price) * Number(entry.quantity)
+    };
+  });
+
+  const subtotal = items.reduce((sum, item) => sum + item.lineTotal, 0);
+  const shipping = subtotal > 180 ? 0 : 12;
+  const total = subtotal + shipping;
+
+  cartRoot.innerHTML = `
+    <div class="cart-layout">
+      <div class="cart-items-panel">
+        <div class="cart-header">
+          <h1>Your cart</h1>
+          <a href="index.html#shop" class="inline-link">Continue shopping</a>
+        </div>
+
+        ${items.map((item) => `
+          <div class="cart-item">
+            <div class="cart-item-art" style="background: linear-gradient(135deg, ${item.product.palette[0]} 0%, ${item.product.palette[1]} 52%, ${item.product.palette[2]} 100%);"></div>
+            <div class="cart-item-body">
+              <div class="cart-item-top">
+                <div>
+                  <h3>${item.product.name}</h3>
+                  <p>${item.product.type} · ${item.product.era}</p>
+                </div>
+                <strong>${formatPrice(item.lineTotal)}</strong>
+              </div>
+
+              <div class="cart-controls">
+                <div class="qty-box" aria-label="Quantity selector">
+                  <button type="button" data-qty="${item.product.id}" data-delta="-1">−</button>
+                  <span>${item.quantity}</span>
+                  <button type="button" data-qty="${item.product.id}" data-delta="1">+</button>
+                </div>
+                <button type="button" class="remove-btn" data-remove="${item.product.id}">Remove</button>
+              </div>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+
+      <aside class="checkout-panel">
+        <h2>Checkout summary</h2>
+        <div class="summary-row"><span>Subtotal</span><span>${formatPrice(subtotal)}</span></div>
+        <div class="summary-row"><span>Shipping</span><span>${shipping === 0 ? 'Free' : formatPrice(shipping)}</span></div>
+        <div class="summary-row total"><span>Total</span><span>${formatPrice(total)}</span></div>
+        <button type="button" class="button primary checkout-btn">Proceed to checkout</button>
+      </aside>
+    </div>
+  `;
+}
+
+function bindFilterControls() {
+  const filterButtons = document.querySelectorAll('[data-filter]');
+  filterButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      activeFilter = button.dataset.filter || 'all';
+      filterButtons.forEach((btn) => btn.classList.toggle('active', btn === button));
+      renderProductCards();
+    });
+  });
+}
+
+function bindCartActions() {
+  document.addEventListener('click', (event) => {
+    const addButton = event.target.closest('[data-add-to-cart]');
+    if (addButton) {
+      const productId = addButton.getAttribute('data-add-to-cart');
+      addToCart(productId, 1);
+      const originalText = addButton.textContent;
+      addButton.textContent = 'Added';
+      addButton.disabled = true;
+      window.setTimeout(() => {
+        addButton.textContent = originalText;
+        addButton.disabled = false;
+      }, 800);
+      return;
+    }
+
+    const qtyButton = event.target.closest('[data-qty]');
+    if (qtyButton) {
+      const productId = qtyButton.getAttribute('data-qty');
+      const delta = Number(qtyButton.getAttribute('data-delta') || 0);
+      adjustCartQuantity(productId, delta);
+      return;
+    }
+
+    const removeButton = event.target.closest('[data-remove]');
+    if (removeButton) {
+      removeFromCart(removeButton.getAttribute('data-remove'));
+    }
+  });
+}
+
+function initializePage() {
+  updateCartCount();
+  bindFilterControls();
+  bindCartActions();
+  renderProductCards();
+  renderProductPage();
+  renderCartPage();
+}
+
+initializePage();
