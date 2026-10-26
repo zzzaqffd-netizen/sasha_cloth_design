@@ -1,0 +1,1139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VINTAGE ARCHIVE — 20 Fashion Web Design Eras</title>
+  
+  <!-- Core Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Phosphor Icons & Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Curated Google Fonts for 20 Vintage Eras -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Bebas+Neue&family=Bungee&family=Cinzel:wght@500;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,700;1,400&family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;600;800&family=Major+Mono+Display&family=Monoton&family=Niconne&family=Playfair+Display:ital,wght@0,600;0,900;1,400&family=Press+Start+2P&family=Righteous&family=Rye&family=Silkscreen&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Special+Elite&family=Syne:wght@700;800&family=UnifrakturMaguntia&family=VT323&display=swap" rel="stylesheet">
+
+  <style>
+    /* Global Reset & Base */
+    * {
+      box-sizing: border-box;
+      -webkit-font-smoothing: antialiased;
+    }
+    
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #0d0e12;
+      color: #e5e5e5;
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    /* Top HUD Fixed Bar */
+    #hud-panel {
+      backdrop-filter: blur(14px);
+      background: rgba(13, 14, 18, 0.92);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+      z-index: 9999;
+    }
+
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    /* Vintage Micro-Effects & Utility */
+    .scanlines {
+      position: relative;
+    }
+    .scanlines::before {
+      content: " ";
+      display: block;
+      position: absolute;
+      top: 0; left: 0; bottom: 0; right: 0;
+      background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.28) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.05), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.05));
+      z-index: 40;
+      background-size: 100% 4px, 6px 100%;
+      pointer-events: none;
+      opacity: 0.7;
+    }
+
+    .film-grain {
+      background-image: radial-gradient(rgba(0, 0, 0, 0.15) 1px, transparent 0);
+      background-size: 4px 4px;
+    }
+
+    @keyframes spin-record {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    .spin-slow {
+      animation: spin-record 14s linear infinite;
+    }
+
+    /* Windows 95 Bevel Effects */
+    .win95-box {
+      background: #c3c3c3;
+      box-shadow: inset -2px -2px #0a0a0a, inset 2px 2px #fff, inset -3px -3px #808080, inset 3px 3px #dfdfdf;
+      color: black;
+    }
+    .win95-btn {
+      background: #c3c3c3;
+      box-shadow: inset -2px -2px #0a0a0a, inset 2px 2px #fff, inset -3px -3px #808080, inset 3px 3px #dfdfdf;
+      color: black;
+      font-family: 'Courier Prime', monospace;
+    }
+    .win95-btn:active {
+      box-shadow: inset 2px 2px #0a0a0a, inset -2px -2px #fff;
+    }
+
+    /* Y2K Bubble Chrome */
+    .y2k-chrome {
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 45%, #ff007f 75%, #00ffff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* 90s Glitch hover */
+    .glitch-hover:hover {
+      text-shadow: 2px 0 #c93b2b, -2px 0 #d4e157;
+      transform: skewX(-4deg);
+      transition: 0.1s ease;
+    }
+
+    /* Newspaper Broadsheet borders */
+    .newspaper-rule {
+      border-top: 3px double #222;
+      border-bottom: 1px solid #222;
+      height: 6px;
+    }
+
+    /* Active switcher pill */
+    .era-pill.active {
+      background: #ffffff;
+      color: #000000;
+      font-weight: 700;
+      box-shadow: 0 0 16px rgba(255,255,255,0.4);
+    }
+  </style>
+</head>
+<body class="selection:bg-amber-400 selection:text-black">
+
+  <!-- HUD NAVIGATION & INSPECTOR -->
+  <header id="hud-panel" class="fixed top-0 left-0 w-full py-2 px-3 sm:px-6 transition-all duration-300">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-2">
+      
+      <!-- Logo & Sound Controls -->
+      <div class="flex items-center justify-between w-full md:w-auto gap-4">
+        <div class="flex items-center gap-2">
+          <span class="inline-block w-3 h-3 rounded-full bg-emerald-400 animate-pulse"></span>
+          <h1 class="text-xs sm:text-sm font-extrabold tracking-widest uppercase text-white flex items-center gap-1.5 font-mono">
+            <span>ARCHIVE.FASHION</span>
+            <span class="text-[10px] px-1.5 py-0.5 rounded bg-zinc-800 text-amber-300 border border-zinc-700">20 ERAS</span>
+          </h1>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <button id="sfx-toggle-btn" onclick="toggleAudio()" class="px-2.5 py-1 text-xs font-mono rounded bg-zinc-800 hover:bg-zinc-700 text-zinc-300 border border-zinc-700 flex items-center gap-1.5 transition">
+            <i id="sfx-icon" class="fa-solid fa-volume-high text-emerald-400"></i>
+            <span id="sfx-label" class="hidden sm:inline">SFX: ON</span>
+          </button>
+          
+          <button onclick="toggleInfoDrawer()" class="px-2.5 py-1 text-xs font-mono rounded bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/40 flex items-center gap-1 transition">
+            <i class="fa-solid fa-sliders"></i>
+            <span class="hidden sm:inline">SPEC SHEET</span>
+          </button>
+
+          <button onclick="openCartDrawer()" class="relative px-3 py-1 text-xs font-mono rounded bg-white text-black font-bold flex items-center gap-1.5 transition shadow-sm hover:bg-zinc-200">
+            <i class="fa-solid fa-bag-shopping"></i>
+            <span id="cart-counter" class="bg-red-600 text-white rounded-full px-1.5 py-0.2 text-[10px]">0</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Quick Era Selector Carousel -->
+      <div class="w-full md:w-auto overflow-x-auto no-scrollbar py-1">
+        <div id="era-buttons-container" class="flex items-center gap-1.5 whitespace-nowrap text-xs font-mono">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- COLLAPSIBLE DESIGN SPEC SHEET / PALETTE DRAWER -->
+  <section id="spec-sheet" class="fixed top-14 left-0 w-full bg-zinc-950/95 border-b border-zinc-800 backdrop-blur-xl z-50 p-4 sm:p-6 transition-all duration-300 transform -translate-y-[150%] max-h-[85vh] overflow-y-auto">
+    <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between gap-6 text-xs font-mono">
+      <div class="flex-1 space-y-2">
+        <div class="flex items-center gap-2">
+          <span id="spec-era-badge" class="px-2 py-0.5 text-[10px] rounded bg-white text-black font-bold uppercase">ERA 01</span>
+          <h2 id="spec-era-title" class="text-lg font-bold text-white tracking-wider">90s Grunge & Skate Archive</h2>
+        </div>
+        <p id="spec-era-vibe" class="text-zinc-400 leading-relaxed font-sans text-sm">Garage rock, DIY punk zines, skater thrift aesthetics, tape noise & raw street culture.</p>
+        <div class="pt-2 text-zinc-300">
+          <span class="text-zinc-500 uppercase font-bold text-[10px]">Typography: </span>
+          <span id="spec-era-fonts" class="text-emerald-300 font-semibold">Syne + Space Mono</span>
+        </div>
+      </div>
+
+      <!-- Color Swatches & Copy -->
+      <div class="flex-1">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-zinc-400 font-bold tracking-wider uppercase text-[10px]">Signature Color Palette</span>
+          <button onclick="copyCurrentPalette()" class="text-amber-400 hover:text-amber-300 text-[11px] flex items-center gap-1 underline underline-offset-2">
+            <i class="fa-regular fa-copy"></i> Copy HEX Codes
+          </button>
+        </div>
+        <div id="spec-swatches" class="grid grid-cols-4 gap-2">
+          <!-- Injected via JS -->
+        </div>
+      </div>
+
+      <!-- Close Drawer Button -->
+      <div class="flex items-start justify-end">
+        <button onclick="toggleInfoDrawer()" class="px-3 py-1.5 rounded bg-zinc-800 hover:bg-zinc-700 text-zinc-300 text-xs">
+          <i class="fa-solid fa-xmark mr-1"></i> Close Sheet
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- RETRO CART / ARCHIVE DRAWER -->
+  <aside id="cart-drawer" class="fixed top-0 right-0 h-full w-full sm:w-96 bg-zinc-950 text-white border-l border-zinc-800 z-[10000] p-6 shadow-2xl transition-transform duration-300 transform translate-x-full flex flex-col font-mono text-xs">
+    <div class="flex items-center justify-between pb-4 border-b border-zinc-800">
+      <div class="flex items-center gap-2">
+        <i class="fa-solid fa-box-archive text-amber-400 text-sm"></i>
+        <h3 class="text-sm font-bold uppercase tracking-wider">Archived Items (<span id="drawer-cart-count">0</span>)</h3>
+      </div>
+      <button onclick="closeCartDrawer()" class="p-1 hover:text-amber-400 text-base">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+
+    <div id="cart-items-list" class="flex-1 overflow-y-auto py-4 space-y-3">
+      <div class="text-center text-zinc-500 py-16">
+        <i class="fa-solid fa-shirt text-3xl mb-3 opacity-30"></i>
+        <p>No specimens archived yet.</p>
+        <p class="text-[10px] text-zinc-600 mt-1">Explore any era and click "Archive Piece".</p>
+      </div>
+    </div>
+
+    <div class="pt-4 border-t border-zinc-800 space-y-3">
+      <div class="flex justify-between items-center text-zinc-400">
+        <span>ESTIMATED VALUE</span>
+        <span id="cart-total-price" class="text-white text-sm font-bold">$0.00</span>
+      </div>
+      <button onclick="triggerCheckoutDemo()" class="w-full py-3 rounded bg-amber-400 hover:bg-amber-300 text-black font-bold tracking-wider text-xs uppercase flex items-center justify-center gap-2 transition">
+        <i class="fa-solid fa-receipt"></i> Export Wardrobe Manifest
+      </button>
+    </div>
+  </aside>
+
+  <!-- QUICK VIEW MODAL -->
+  <div id="quick-modal" class="fixed inset-0 bg-black/85 backdrop-blur-md z-[10001] hidden flex items-center justify-center p-4">
+    <div id="modal-container" class="relative max-w-2xl w-full bg-zinc-900 border border-zinc-700 rounded-lg p-6 sm:p-8 text-zinc-100 shadow-2xl">
+      <!-- Injected modal content -->
+    </div>
+  </div>
+
+  <!-- MAIN DYNAMIC DESIGN SHOWCASE CANVAS -->
+  <main id="showcase-viewport" class="pt-16 min-h-screen transition-colors duration-500">
+    <!-- Theme Dynamic HTML is inserted here -->
+  </main>
+
+  <!-- JAVASCRIPT LOGIC & 20 COMPLETE VINTAGE DEFINITIONS -->
+  <script>
+    /* Audio Synthesizer via Web Audio API */
+    let audioCtx = null;
+    let sfxEnabled = true;
+
+    function initAudio() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+    }
+
+    function playVintageSfx(type = 'click') {
+      if (!sfxEnabled) return;
+      try {
+        initAudio();
+        if (audioCtx.state === 'suspended') {
+          audioCtx.resume();
+        }
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+
+        const now = audioCtx.currentTime;
+
+        if (type === 'click') {
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(800, now);
+          osc.frequency.exponentialRampToValueAtTime(120, now + 0.05);
+          gain.gain.setValueAtTime(0.12, now);
+          gain.gain.linearRampToValueAtTime(0.001, now + 0.05);
+          osc.start(now);
+          osc.stop(now + 0.05);
+        } else if (type === 'glitch') {
+          osc.type = 'sawtooth';
+          osc.frequency.setValueAtTime(180, now);
+          osc.frequency.setValueAtTime(320, now + 0.03);
+          osc.frequency.setValueAtTime(90, now + 0.06);
+          gain.gain.setValueAtTime(0.08, now);
+          gain.gain.linearRampToValueAtTime(0.001, now + 0.1);
+          osc.start(now);
+          osc.stop(now + 0.1);
+        } else if (type === 'cart') {
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(523.25, now); // C5
+          osc.frequency.setValueAtTime(659.25, now + 0.08); // E5
+          gain.gain.setValueAtTime(0.15, now);
+          gain.gain.linearRampToValueAtTime(0.001, now + 0.2);
+          osc.start(now);
+          osc.stop(now + 0.2);
+        }
+      } catch (e) {
+        // Safe fallback for autoplay policies
+      }
+    }
+
+    function toggleAudio() {
+      sfxEnabled = !sfxEnabled;
+      document.getElementById('sfx-icon').className = sfxEnabled 
+        ? 'fa-solid fa-volume-high text-emerald-400' 
+        : 'fa-solid fa-volume-xmark text-zinc-500';
+      document.getElementById('sfx-label').innerText = sfxEnabled ? 'SFX: ON' : 'SFX: OFF';
+      if (sfxEnabled) playVintageSfx('click');
+    }
+
+    /* 20 DEFINITIVE VINTAGE THEMES */
+    const vintageThemes = [
+      {
+        id: "grunge-90s",
+        name: "90s Grunge & Skate",
+        short: "90s Grunge",
+        decade: "1990s",
+        fonts: { header: "'Syne', sans-serif", body: "'Space Mono', monospace" },
+        colors: { bg: "#121212", text: "#E5E5E5", accent: "#C93B2B", secondary: "#D4E157" },
+        vibe: "Garage rock tape noise, flannel layers, skate curb scratches, and unpolished photocopied zines.",
+        heroTag: "ISSUE #42 — CASSETTE UNDERGROUND",
+        heroTitle: "RAW SUBURBAN VELOCITY",
+        heroSubtitle: "Hand-distressed heavyweight denim, salvaged knitwear & bootleg skateboards.",
+        brandName: "DRAIN 93",
+        products: [
+          { name: "Heavy Plaid Flannel Overshirt", price: 110, tag: "DISTRESSED", icon: "fa-shirt", desc: "100% thick brushed cotton salvaged from Seattle textile dumps, bleach-splattered." },
+          { name: "Slouchy Skate Denim 1994", price: 135, tag: "SOLD OUT", icon: "fa-socks", desc: "Wide-leg 14oz broken twill with fraying hemline and rusted alloy hardware." },
+          { name: "Bootleg VHS Printed Tee", price: 54, tag: "SALE -20%", icon: "fa-compact-disc", desc: "Silkscreen print using cracked rubber plastisol ink on faded charcoal blank." }
+        ]
+      },
+      {
+        id: "old-money",
+        name: "Old Money Ivy & Heritage",
+        short: "Ivy League",
+        decade: "1960s-70s",
+        fonts: { header: "'Playfair Display', serif", body: "'Cormorant Garamond', serif" },
+        colors: { bg: "#F7F4EA", text: "#1B382B", accent: "#5C1D24", secondary: "#C5A059" },
+        vibe: "Equestrian polo pavilions, collegiate library wood panels, Shetland wool and quiet generational wealth.",
+        heroTag: "ROWING CLUB DEPT. — ESTABLISHED 1968",
+        heroTitle: "THE ARISTOCRATIC UNIFORM",
+        heroSubtitle: "Hand-tailored tweed blazers, Oxford cotton button-downs and genuine cable-knit cashmere.",
+        brandName: "HAWTHORNE & REED",
+        products: [
+          { name: "Double-Breasted Tweed Overcoat", price: 680, tag: "HERITAGE SPECIMEN", icon: "fa-vest", desc: "Hand-woven Scottish Donegal yarn with horn buttons and silk twill inner lining." },
+          { name: "Chunky Cable-Knit Cricket Vest", price: 240, tag: "LIMITED 50 PCS", icon: "fa-ribbon", desc: "100% undyed British wool with burgundy collegiate stripe detailing." },
+          { name: "Classic Oxford Pinpoint Shirt", price: 145, tag: "STAPLE", icon: "fa-shirt", desc: "Single-needle tailoring with genuine mother-of-pearl buttons." }
+        ]
+      },
+      {
+        id: "y2k-cyber",
+        name: "Y2K Cyber Utopia",
+        short: "Y2K Cyber",
+        decade: "2000s",
+        fonts: { header: "'Righteous', cursive", body: "'Silkscreen', monospace" },
+        colors: { bg: "#090A10", text: "#FFFFFF", accent: "#FF007F", secondary: "#00FFFF" },
+        vibe: "Liquid chrome, translucent iMacs, MTV countdowns, low-rise nylon cargo pants and mp3 files.",
+        heroTag: "SYSTEM ONLINE 2002.VER",
+        heroTitle: "CHROMA DIGITAL REVOLUTION",
+        heroSubtitle: "Reflective iridescent track jackets, metallic blow-up puffers & mini bags.",
+        brandName: "CYBERPULSE.NET",
+        products: [
+          { name: "Liquid Silver Puffer Coat", price: 210, tag: "HOT CHROME", icon: "fa-shield-halved", desc: "Thermal heat-reflective nylon with holographic silicone branding badges." },
+          { name: "Tactical Micro Cargo Mini Skirt", price: 85, tag: "LOW RISE", icon: "fa-bolt", desc: "Quick-dry nylon with bungee cord pullers and metallic utility rings." },
+          { name: "Iridescent Glitch Visor Shades", price: 65, tag: "RAVE GEAR", icon: "fa-glasses", desc: "UV400 polycarbonate shield with gradient purple-to-cyan mirror finish." }
+        ]
+      },
+      {
+        id: "70s-disco",
+        name: "70s Soul & Sun-Drenched Disco",
+        short: "70s Soul",
+        decade: "1970s",
+        fonts: { header: "'Abril Fatface', cursive", body: "'Courier Prime', monospace" },
+        colors: { bg: "#FAF3E0", text: "#3D2619", accent: "#9E2A2B", secondary: "#E09F3E" },
+        vibe: "Venice Beach golden hour, warm vinyl bass grooves, wide velvet lapels and retro striped corduroy.",
+        heroTag: "STEREO HI-FI 33 RPM RECORDINGS",
+        heroTitle: "SUNSHINE GROOVE & VELVET",
+        heroSubtitle: "Flared bell-bottom trousers, silky dagger-collar shirts and warm sunset knits.",
+        brandName: "STUDIO SOL 74",
+        products: [
+          { name: "Ochre Wide-Wale Corduroy Suit", price: 340, tag: "GOLDEN GROOVE", icon: "fa-record-vinyl", desc: "Plush 8-wale velvet cotton with flared bottoms and oversized peaked lapels." },
+          { name: "Dagger Collar Printed Silk Shirt", price: 165, tag: "ORIGINAL PRINT", icon: "fa-sun", desc: "Geometric sunburst motif inspired by California soul record covers." },
+          { name: "Chunky Amber Acetate Aviators", price: 95, tag: "RETRO TINT", icon: "fa-glasses", desc: "Warm cognac tinted lenses with hand-polished retro tortoiseshell frames." }
+        ]
+      },
+      {
+        id: "win95-brutalism",
+        name: "Windows 95 Brutalism (Web 1.0)",
+        short: "Win95 Web",
+        decade: "1995",
+        fonts: { header: "'VT323', monospace", body: "'Courier Prime', monospace" },
+        colors: { bg: "#008080", text: "#000000", accent: "#000080", secondary: "#C3C3C3" },
+        vibe: "Dial-up modem clicks, grey beveled taskbars, MS Paint banners and pixelated desktop aesthetics.",
+        heroTag: "C:\\APPAREL\\CATALOG.EXE [READY]",
+        heroTitle: "32-BIT WEARABLE COMPUTING",
+        heroSubtitle: "Standard-issue nylon computer lab apparel. No cookies. No bloatware. 100% bandwidth.",
+        brandName: "SYS_WEAR.DLL",
+        products: [
+          { name: "SysAdmin Polar Fleece Pullover", price: 75, tag: "VER 1.02", icon: "fa-microchip", desc: "Deep teal anti-pill fleece with zip neck pocket designed for 3.5-inch floppies." },
+          { name: "Dial-Up Utility Messenger Bag", price: 90, tag: "SCSI COMPATIBLE", icon: "fa-floppy-disk", desc: "Reinforced ballistic nylon with internal sleeves for ThinkPad 701c butterfly keyboard." },
+          { name: "CRT Anti-Glare Worker Glasses", price: 45, tag: "PLUG & PLAY", icon: "fa-desktop", desc: "Vintage blue-light reflective spectacles with industrial wireframes." }
+        ]
+      },
+      {
+        id: "workwear-40s",
+        name: "Vintage Americana & Workwear",
+        short: "1940s Workwear",
+        decade: "1940s",
+        fonts: { header: "'Bebas Neue', sans-serif", body: "'Courier Prime', monospace" },
+        colors: { bg: "#EFECE1", text: "#1E2D4A", accent: "#B85B23", secondary: "#8C7A5B" },
+        vibe: "Heavy shuttle-loom denim, rivet factories, union labels, waxed tin-cloth and honest grease.",
+        heroTag: "UNION CRAFTED — SPEC No. 894",
+        heroTitle: "BUILT FOR THE LONG HAUL",
+        heroSubtitle: "Triple-needle stitched overalls, selvedge chore coats & oiled horsehide leathers.",
+        brandName: "IRON & FORGE CO.",
+        products: [
+          { name: "16oz Japanese Selvedge Chore Coat", price: 295, tag: "RAW DENIM", icon: "fa-hammer", desc: "Unsanforized raw denim woven on vintage Toyoda shuttle looms with brass donut buttons." },
+          { name: "Heavy Canvas Utility Carpenter Pants", price: 165, tag: "DOUBLE KNEE", icon: "fa-ruler-combined", desc: "12oz duck canvas with tool loops, reinforced rivets and hammer strap." },
+          { name: "Waxed Canvas Field Cap", price: 60, tag: "WEATHERPROOF", icon: "fa-wrench", desc: "Paraffin-waxed cotton canvas that patinas beautifully with every fold." }
+        ]
+      },
+      {
+        id: "french-riviera",
+        name: "French Riviera & 60s Nouvelle Vague",
+        short: "60s Riviera",
+        decade: "1960s",
+        fonts: { header: "'Playfair Display', serif", body: "'Inter', sans-serif" },
+        colors: { bg: "#FFFDF7", text: "#003893", accent: "#F28F79", secondary: "#F6E7A1" },
+        vibe: "Sun-drenched Cannes promenades, Breton stripes, espresso saucers, linen towels & cinema verité.",
+        heroTag: "COLLECTION D'ÉTÉ — SAINT-TROPEZ",
+        heroTitle: "L'ÉLÉGANCE DÉCONTRACTÉE",
+        heroSubtitle: "Breathable open-collar linen shirts, sailor knits and tailored leisure shorts.",
+        brandName: "LE CÔTE D'AZUR",
+        products: [
+          { name: "Heavyweight Breton Striped Longsleeve", price: 120, tag: "NAUTIQUE", icon: "fa-anchor", desc: "Traditional 280gsm combed cotton jersey woven in Brittany, France." },
+          { name: "Camp-Collar Garment-Dyed Linen Shirt", price: 150, tag: "PURE LINEN", icon: "fa-umbrella-beach", desc: "Air-washed French flax linen with subtle mother-of-pearl buttons." },
+          { name: "Tailored Pleated Riviera Shorts", price: 110, tag: "EDITION 62", icon: "fa-ship", desc: "High-rise cut with adjustable side-tabs and crisp single front pleats." }
+        ]
+      },
+      {
+        id: "80s-synthwave",
+        name: "80s Synthwave & Neon Arcade",
+        short: "80s Synth",
+        decade: "1980s",
+        fonts: { header: "'Righteous', cursive", body: "'Space Mono', monospace" },
+        colors: { bg: "#0B0C10", text: "#FFFFFF", accent: "#FF0055", secondary: "#00FFFF" },
+        vibe: "Midnight highway cruising, analog Yamaha synths, arcade coin slots and laser grid horizons.",
+        heroTag: "FM TRANSMISSION // 104.2 MHZ",
+        heroTitle: "MIDNIGHT TURBO RACER",
+        heroSubtitle: "Color-blocked windbreakers, iridescent high-tops & retro geometric racing suits.",
+        brandName: "OUTRUN SPORTS",
+        products: [
+          { name: "Colorblock Neon Shell Windbreaker", price: 140, tag: "RETRO RUNNER", icon: "fa-bolt-lightning", desc: "Crisp crinkled ripstop nylon with neon magenta and cyan chevron panels." },
+          { name: "Laser Grid Oversized Graphic Tee", price: 55, tag: "SCREENPRINT", icon: "fa-gamepad", desc: "Heavy 240gsm cotton wash with glow-in-the-dark retro grid artwork." },
+          { name: "High-Top Neon Leather Court Sneakers", price: 195, tag: "TURBO EDITION", icon: "fa-shoe-prints", desc: "Supple perforated leather with bright turquoise accents and EVA cushioned sole." }
+        ]
+      },
+      {
+        id: "editorial-newspaper",
+        name: "1930s Broadsheet & Classifieds",
+        short: "1930s Press",
+        decade: "1930s",
+        fonts: { header: "'UnifrakturMaguntia', cursive", body: "'Courier Prime', monospace" },
+        colors: { bg: "#EBE7DF", text: "#1F1F1F", accent: "#8E2800", secondary: "#555555" },
+        vibe: "Typesetter printshops, morning coffee on coarse newsprint, classified column notices & lead ink.",
+        heroTag: "DAILY DISPATCH — CITY GAZETTE VOL. 88",
+        heroTitle: "AUTHENTIC PROVINCIAL DRY GOODS",
+        heroSubtitle: "Reliable woolen suits, pocketed work vests & durable woven trench coats guaranteed against harsh rain.",
+        brandName: "THE DISPATCH CO.",
+        products: [
+          { name: "The Reporter Double-Breasted Trench", price: 380, tag: "WATERPROOF", icon: "fa-newspaper", desc: "Dense gabardine cotton woven with stormy weather storm-flaps and brass belt rings." },
+          { name: "Newsboy Herringbone Wool Cap", price: 70, tag: "AUTHENTIC CUT", icon: "fa-feather", desc: "8-panel classic cap crafted from wool tweed with satin interior crown lining." },
+          { name: "The Typesetter Waistcoat Vest", price: 140, tag: "LIMITED RUN", icon: "fa-pencil", desc: "Notched lapel wool vest with dedicated pen slot and brass watch fob buttonhole." }
+        ]
+      },
+      {
+        id: "victorian-gothic",
+        name: "Victorian Gothic Dark Romance",
+        short: "Victorian Gothic",
+        decade: "1890s",
+        fonts: { header: "'Cinzel', serif", body: "'Cormorant Garamond', serif" },
+        colors: { bg: "#0D0D0D", text: "#E0DCD3", accent: "#5C1D24", secondary: "#A39E99" },
+        vibe: "Crushed midnight velvet, mourning lace, candlelight shadows, wrought-iron gates & silver pocket watches.",
+        heroTag: "CANDLELIT ATELIER // VOLUME XIX",
+        heroTitle: "NOCTURNAL ARISTOCRACY",
+        heroSubtitle: "High-collar ruffled blouses, Victorian velvet frock coats & corsetry tailored for the evening.",
+        brandName: "OBSCURA & THORNE",
+        products: [
+          { name: "Midnight Velvet Frock Tailcoat", price: 540, tag: "VELVET EMBOSS", icon: "fa-crow", desc: "Heavy silk-viscose deep black velvet with antique filigree silver closure buttons." },
+          { name: "High-Collar Victorian Ruffle Blouse", price: 195, tag: "MOURNING SILK", icon: "fa-gem", desc: "Delicate pleated silk chiffon with lace jabot and antique jet-black button detailing." },
+          { name: "Structured Underbust Brocade Corset", price: 230, tag: "STEEL BONED", icon: "fa-scroll", desc: "Woven floral damask pattern reinforced with 16 spiral steel bones for graceful silhouette." }
+        ]
+      },
+      {
+        id: "bauhaus-modernism",
+        name: "Bauhaus Modernism 1920s",
+        short: "1920s Bauhaus",
+        decade: "1920s",
+        fonts: { header: "'Bebas Neue', sans-serif", body: "'Inter', sans-serif" },
+        colors: { bg: "#F2EFE9", text: "#181818", accent: "#DE3831", secondary: "#1E4B9C" },
+        vibe: "Form follows function, primary color geometry, tubular steel frames, asymmetrical balances.",
+        heroTag: "WEIMAR DESSAU ATELIER — SERIES 03",
+        heroTitle: "FORM FOLLOWS FORM",
+        heroSubtitle: "Monochrome geometrical knitwear and modular wool separates constructed with strict mathematical ratio.",
+        brandName: "KRAFTWERK 1923",
+        products: [
+          { name: "Colorblock Geometric Bauhaus Cardigan", price: 220, tag: "PURE GEOMETRY", icon: "fa-shapes", desc: "Heavy knit lambswool featuring primary red and cobalt abstract colorblock fields." },
+          { name: "Tubular Wool Modular Overcoat", price: 420, tag: "SERIES 01", icon: "fa-compass-drafting", desc: "Clean collarless architecture with concealed magnet fasteners and zero excess ornamentation." },
+          { name: "Primary Canvas Constructivist Tote", price: 85, tag: "FUNCTION ONLY", icon: "fa-square", desc: "Durable unbleached canvas featuring silk-screened rational grid guidelines." }
+        ]
+      },
+      {
+        id: "palm-springs-50s",
+        name: "Mid-Century Palm Springs 1950s",
+        short: "50s Mid-Century",
+        decade: "1950s",
+        fonts: { header: "'Righteous', cursive", body: "'Inter', sans-serif" },
+        colors: { bg: "#F8F5EE", text: "#283E38", accent: "#E07A5F", secondary: "#81B29A" },
+        vibe: "Eames plywood lounge chairs, turquoise swimming pools, breeze block courtyards and tiki cocktails.",
+        heroTag: "RESORT WEAR — CANYON CLUB 1956",
+        heroTitle: "DESERT OASIS LEISURE",
+        heroSubtitle: "Terry-cloth cabana shirts, printed swim trunks & relaxed tropical-weight rayon.",
+        brandName: "PALM & ATOM",
+        products: [
+          { name: "Terry Cloth Cabana Resort Shirt", price: 135, tag: "POOL DECK", icon: "fa-martini-glass", desc: "Plush organic cotton towel knit designed for easy post-swim cocktail lounging." },
+          { name: "High-Waist Hollywood Trouser", price: 175, tag: "ATOMIC CUT", icon: "fa-fan", desc: "Continuous waistband construction with double reverse pleats in sage linen blend." },
+          { name: "Cat-Eye Retro Tortoise Sunglasses", price: 90, tag: "LIMITED EDITION", icon: "fa-glasses", desc: "Handcrafted Italian acetate featuring vintage atomic star rivets on temple arms." }
+        ]
+      },
+      {
+        id: "mod-carnaby-60s",
+        name: "60s Mod Carnaby Street London",
+        short: "60s Carnaby Mod",
+        decade: "1960s",
+        fonts: { header: "'Bungee', cursive", body: "'Courier Prime', monospace" },
+        colors: { bg: "#FAFAFA", text: "#111111", accent: "#ED2224", secondary: "#0047AB" },
+        vibe: "Vespa scooters, target logos, Twiggy optical A-line shift dresses, Union Jack pop art and R&B beats.",
+        heroTag: "CARNABY STREET SOHO // BOUTIQUE",
+        heroTitle: "THE YOUTHQUAKE LOOK",
+        heroSubtitle: "Optical illusion graphic mini-dresses, slim-fit polo knits & sharp-creased drainpipes.",
+        brandName: "SUPERPOP LONDON",
+        products: [
+          { name: "Target Op-Art Geometric Shift Mini", price: 160, tag: "POP PIECE", icon: "fa-bullseye", desc: "Structured wool-crepe mini featuring stark black-and-white optical circle motifs." },
+          { name: "Fine Gauge Merino Tipped Knit Polo", price: 125, tag: "VESPA READY", icon: "fa-motorcycle", desc: "Knitted Italian merino with retro twin-tipping along the sharp spear collar." },
+          { name: "Chelsea Beatle Boot in Patent Gloss", price: 215, tag: "60S ROCKER", icon: "fa-shoe-prints", desc: "Glossy calf leather with Cuban heel and signature elasticated side gussets." }
+        ]
+      },
+      {
+        id: "miami-vice-pastel",
+        name: "80s Miami Vice Pastel Wave",
+        short: "80s Miami Vice",
+        decade: "1980s",
+        fonts: { header: "'Bebas Neue', sans-serif", body: "'Inter', sans-serif" },
+        colors: { bg: "#F3FAFC", text: "#1D3557", accent: "#E63946", secondary: "#48CAE4" },
+        vibe: "Art deco neon lights, Ferrari Testarossas, roll-up sleeve linen jackets, pastel sunsets & power boats.",
+        heroTag: "OCEAN DRIVE HARBOR // EPISODE 04",
+        heroTitle: "SUNSET VICE UNIFORM",
+        heroSubtitle: "Unstructured pastel blazers, white silk tees, and pleated trousers worn without socks.",
+        brandName: "VICE & CORAL",
+        products: [
+          { name: "Unstructured Flamingo Pink Silk Blazer", price: 310, tag: "CROCKETT CUT", icon: "fa-water", desc: "Soft silk-blend lightweight suiting designed to be worn effortlessly over plain cotton tees." },
+          { name: "Pleated Tapered Linen Ocean Trouser", price: 145, tag: "SUMMER SUIT", icon: "fa-wind", desc: "Pure white breathable linen with loose drape through hips and aggressive ankle taper." },
+          { name: "Mirror Aviators with Gold Titanium Trim", price: 120, tag: "HIGH SPEED", icon: "fa-glasses", desc: "Polarized rose-gradient aviator lenses housed in gleaming electroplated gold." }
+        ]
+      },
+      {
+        id: "ukiyo-e-retro",
+        name: "Japanese Ukiyo-e Retro Kimono",
+        short: "Ukiyo-e Japan",
+        decade: "1920s-50s",
+        fonts: { header: "'DM Serif Display', serif", body: "'Space Mono', monospace" },
+        colors: { bg: "#F5F2EB", text: "#1C1D21", accent: "#C1382B", secondary: "#2A4B7C" },
+        vibe: "Indigo vats, woodblock prints, noragi work coats, sashiko stitching and cherry blossom seasons.",
+        heroTag: "KYOTO ARCHIVAL WORKSHOP — TRADITION",
+        heroTitle: "INDIGO SASHIKO CRAFT",
+        heroSubtitle: "Hand-dyed botanical indigo kimonos, reinforced worker jackets and tenugui cotton scarves.",
+        brandName: "KIZUNA TEXTILES",
+        products: [
+          { name: "Natural Indigo Sashiko Haori Coat", price: 340, tag: "HAND-DYED", icon: "fa-scroll", desc: "Heavy rice-grain cotton stitched with thick white contrast sashiko reinforcement threads." },
+          { name: "Woven Kasuri Patterned Work Shirt", price: 180, tag: "SHUTTLE LOOM", icon: "fa-leaf", desc: "Ikat-dyed yarn resulting in subtle traditional Japanese mountain mist motifs." },
+          { name: "Selvedge Indigo Tenugui Scarf", price: 55, tag: "ORGANIC INDIGO", icon: "fa-wind", desc: "Hand-printed using ancient persimmon woodblock carved in Okayama prefecture." }
+        ]
+      },
+      {
+        id: "art-nouveau-1890s",
+        name: "Art Nouveau Botanical 1890s",
+        short: "1890s Art Nouveau",
+        decade: "1890s",
+        fonts: { header: "'Cormorant Garamond', serif", body: "'Cormorant Garamond', serif" },
+        colors: { bg: "#FAF8F2", text: "#1E2B22", accent: "#9D5C63", secondary: "#B89758" },
+        vibe: "Whiplash curves, dragonfly motifs, Mucha stained glass, botanical stems, velvet embroidery.",
+        heroTag: "SALON DE PARIS — IMPERIAL JUBILEE",
+        heroTitle: "ORGANIC WHIPLASH CURVES",
+        heroSubtitle: "Flowing botanical silk dresses, gold leaf filigree brooches and velvet evening wraps.",
+        brandName: "MAISON L’ORCHIDÉE",
+        products: [
+          { name: "Embroidered Botanical Velvet Evening Cape", price: 590, tag: "HAND EMBROIDERED", icon: "fa-spa", desc: "Heavy moss-green velvet with silk-threaded gilded iris vines swirling across the hem." },
+          { name: "Flowing Water Lily Chiffon Gown", price: 420, tag: "PARIS SALON", icon: "fa-feather-pointed", desc: "Bias-cut layers of semi-sheer silk chiffon that ripple like gentle river waves." },
+          { name: "Gilded Dragonfly Filigree Brooch", price: 160, tag: "HEIRLOOM", icon: "fa-ring", desc: "Solid bronze dipped in 24k satin gold featuring plique-à-jour enamel wings." }
+        ]
+      },
+      {
+        id: "soviet-constructivism",
+        name: "Soviet Constructivism 1920s",
+        short: "Constructivism",
+        decade: "1920s",
+        fonts: { header: "'Bebas Neue', sans-serif", body: "'Courier Prime', monospace" },
+        colors: { bg: "#D9D4C7", text: "#111111", accent: "#C82323", secondary: "#2A2A2A" },
+        vibe: "Agitprop posters, diagonal geometry, functional work clothing (prozodezhda), bold mechanical typography.",
+        heroTag: "PRODUCTION FACTORY № 07 // LEF",
+        heroTitle: "THE UNIVERSAL WORKER UNIFORM",
+        heroSubtitle: "Standardized durable twill workwear designed for factory speed, ergonomics, and collective strength.",
+        brandName: "PROZODEZHDA",
+        products: [
+          { name: "Type-A Heavy Canvas Worker Overalls", price: 140, tag: "GOST STANDARD", icon: "fa-industry", desc: "Modular twill overalls with reinforced tool harness and zero bourgeois frills." },
+          { name: "Diagonal Agitprop Graphic Hoodie", price: 95, tag: "EDITION 1924", icon: "fa-gears", desc: "Heavy fleeced cotton screenprinted with Rodchenko inspired dynamic typography." },
+          { name: "Heavy Canvas Mechanical Satchel", price: 75, tag: "ALL-WEATHER", icon: "fa-briefcase", desc: "Sturdy tarpaulin canvas sealed with oxidized steel buckles and stencil numbering." }
+        ]
+      },
+      {
+        id: "punk-fanzine-77",
+        name: "70s Punk Fanzine London",
+        short: "77 London Punk",
+        decade: "1977",
+        fonts: { header: "'Bebas Neue', sans-serif", body: "'Courier Prime', monospace" },
+        colors: { bg: "#000000", text: "#FFFFFF", accent: "#E50000", secondary: "#FFEE00" },
+        vibe: "Safety pins, torn mohair sweaters, ransom note typography, King's Road rebellion and screeching guitars.",
+        heroTag: "SNIFFIN' GLUE // FANZINE ISSUE 09",
+        heroTitle: "CHAOS & SAFETY PINS",
+        heroSubtitle: "Hand-slashed tartan bondage trousers, studded leather biker jackets and oversized mohair knits.",
+        brandName: "SEDITION 77",
+        products: [
+          { name: "Hand-Distressed Mohair Cobweb Sweater", price: 210, tag: "TORN KNIT", icon: "fa-skull", desc: "Open knit spider-web yarn with raw frayed cuffs and asymmetrical neck opening." },
+          { name: "Royal Tartan Zippered Bondage Trousers", price: 195, tag: "BONDAGE GEAR", icon: "fa-link", desc: "Authentic wool tartan with connecting bum flap, knee straps and chunky silver zips." },
+          { name: "Custom Safety Pin Studded Leather Belt", price: 80, tag: "DIY LONDON", icon: "fa-ring", desc: "Full-grain thick bridle leather studded by hand with 120 nickel safety pins." }
+        ]
+      },
+      {
+        id: "rockabilly-diner-50s",
+        name: "50s Diner Rockabilly & Greaser",
+        short: "50s Rockabilly",
+        decade: "1950s",
+        fonts: { header: "'Righteous', cursive", body: "'Courier Prime', monospace" },
+        colors: { bg: "#FFF9F5", text: "#1A1A1A", accent: "#D62828", secondary: "#F77F00" },
+        vibe: "Jukebox chrome, checkered tile floors, cherry milkshakes, cuffed denim, pompadours and hot rods.",
+        heroTag: "HIGHWAY 66 DINER // OPEN 24 HOURS",
+        heroTitle: "HOT ROD ROCK & ROLL",
+        heroSubtitle: "Chain-stitched bowling shirts, horsehide motorcycle jackets and 14oz deep-cuffed jeans.",
+        brandName: "LUCKY 13 SPEED",
+        products: [
+          { name: "Chain-Stitched Two-Tone Bowling Shirt", price: 130, tag: "GARAGE CREW", icon: "fa-bowling-ball", desc: "Silky vintage rayon with contrast black collar and custom chainstitch embroidery on back." },
+          { name: "Heavy Steerhide Greaser Rider Jacket", price: 490, tag: "GENUINE LEATHER", icon: "fa-motorcycle", desc: "Heavy 1.3mm vintage steerhide with asymmetrical brass Talon zipper and quilted red lining." },
+          { name: "Deep Cuffed Raw Indigo Selvage Dungarees", price: 160, tag: "HIGH RISE", icon: "fa-wrench", desc: "Straight leg 1955 silhouette tailored for massive 4-inch white chainstitched cuffs." }
+        ]
+      },
+      {
+        id: "indie-sleaze-2008",
+        name: "2000s Indie Sleaze & Tumblr",
+        short: "Indie Sleaze 2008",
+        decade: "2008",
+        fonts: { header: "'Abril Fatface', cursive", body: "'Space Mono', monospace" },
+        colors: { bg: "#0F0F12", text: "#EEEEEE", accent: "#FF2E93", secondary: "#00F0FF" },
+        vibe: "Flash photography in dark basement clubs, American Apparel disco pants, smeared eyeliner, vinyl tote bags.",
+        heroTag: "POLAROID FLASH // COBRAMRASHOOTS",
+        heroTitle: "LO-FI GLAMOUR & NIGHT DRIVES",
+        heroSubtitle: "Deep V-neck sheer tees, shiny stretch disco leggings & vintage leather biker vests.",
+        brandName: "DISCO SLEAZE",
+        products: [
+          { name: "High-Waist Shiny Nylon Disco Pants", price: 95, tag: "DANCE FLOOR", icon: "fa-compact-disc", desc: "Super-stretch high-shine nylon that catches intense on-camera direct flash." },
+          { name: "Deep V-Neck Ultra-Fine Jersey Tee", price: 42, tag: "SLOUCHY FIT", icon: "fa-camera-retro", desc: "Semi-translucent featherweight combed cotton designed for layering with silver chains." },
+          { name: "Worn Leather Mini Backpack & Keyring", price: 110, tag: "CLUB ESSENTIAL", icon: "fa-ticket", desc: "Crinkled soft vegan leather with dual brass compartments and safety pin zipper pulls." }
+        ]
+      }
+    ];
+
+    let currentEraIndex = 0;
+    let archivedCart = [];
+
+    /* Initialize buttons and default design */
+    function initShowcase() {
+      const container = document.getElementById('era-buttons-container');
+      container.innerHTML = '';
+
+      vintageThemes.forEach((era, idx) => {
+        const btn = document.createElement('button');
+        btn.className = `era-pill px-3 py-1.5 rounded-full border border-zinc-700/80 bg-zinc-900/90 text-zinc-300 hover:border-zinc-400 hover:text-white transition duration-200 ${idx === 0 ? 'active' : ''}`;
+        btn.setAttribute('data-index', idx);
+        btn.innerHTML = `<span class="opacity-60 text-[10px] mr-1">#${(idx+1).toString().padStart(2, '0')}</span>${era.short}`;
+        btn.onclick = () => selectEra(idx);
+        container.appendChild(btn);
+      });
+
+      renderEra(0);
+    }
+
+    /* Era Switch Handler */
+    function selectEra(index) {
+      if (index === currentEraIndex) return;
+      playVintageSfx(index % 2 === 0 ? 'click' : 'glitch');
+      currentEraIndex = index;
+
+      // Update pills
+      document.querySelectorAll('.era-pill').forEach((btn, idx) => {
+        if (idx === index) {
+          btn.classList.add('active');
+          btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        } else {
+          btn.classList.remove('active');
+        }
+      });
+
+      renderEra(index);
+      updateSpecSheet(index);
+    }
+
+    /* Render the Full Dynamic Vintage Showcase Page */
+    function renderEra(idx) {
+      const era = vintageThemes[idx];
+      const root = document.getElementById('showcase-viewport');
+
+      // Style specifics
+      const isDark = era.colors.bg.toLowerCase().startsWith('#0') || era.colors.bg.toLowerCase().startsWith('#1');
+      const isWin95 = era.id === "win95-brutalism";
+      const isNewspaper = era.id === "editorial-newspaper";
+      const is70s = era.id === "70s-disco";
+      const isGothic = era.id === "victorian-gothic";
+
+      let eraSpecificClass = "";
+      if (era.id === "grunge-90s") eraSpecificClass = "scanlines";
+      if (isNewspaper) eraSpecificClass = "film-grain";
+
+      // Build Dynamic HTML Template
+      let html = `
+        <div class="relative w-full min-h-screen transition-all duration-300 ${eraSpecificClass}" 
+             style="background-color: ${era.colors.bg}; color: ${era.colors.text}; font-family: ${era.fonts.body};">
+          
+          <!-- ERA BRAND BANNER / HEADER -->
+          <div class="border-b" style="border-color: ${era.colors.text}22;">
+            <div class="max-w-7xl mx-auto px-4 sm:px-8 py-4 flex flex-col sm:flex-row justify-between items-center gap-3">
+              <div class="flex items-center gap-3">
+                <span class="text-xs uppercase px-2 py-0.5 rounded font-mono font-bold" 
+                      style="background-color: ${era.colors.accent}; color: #ffffff;">
+                  ERA ${era.decade}
+                </span>
+                <span class="text-xs tracking-wider opacity-75">${era.heroTag}</span>
+              </div>
+
+              <!-- Brand Title in Era Font -->
+              <div class="text-center">
+                <h1 class="text-2xl sm:text-4xl font-black tracking-wider uppercase transition-transform duration-300 hover:scale-105" 
+                    style="font-family: ${era.fonts.header}; color: ${era.colors.text};">
+                  ${era.brandName}
+                </h1>
+              </div>
+
+              <!-- Era Auxiliary Badges -->
+              <div class="flex items-center gap-2 text-xs font-mono">
+                <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded" style="background-color: ${era.colors.text}11; border: 1px solid ${era.colors.text}33;">
+                  <span class="w-2 h-2 rounded-full" style="background-color: ${era.colors.secondary};"></span>
+                  AUTHENTIC CUT
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- HERO SECTION -->
+          <section class="max-w-7xl mx-auto px-4 sm:px-8 py-12 sm:py-20 relative">
+            
+            ${is70s ? `
+              <!-- 70s Spinning Record Graphic -->
+              <div class="absolute right-8 top-12 hidden lg:flex items-center justify-center opacity-80 pointer-events-none">
+                <div class="w-48 h-48 rounded-full bg-stone-900 border-4 border-amber-500/50 flex items-center justify-center spin-slow shadow-2xl">
+                  <div class="w-16 h-16 rounded-full bg-red-700 flex items-center justify-center text-[10px] text-white font-mono font-bold">
+                    33 RPM
+                  </div>
+                </div>
+              </div>
+            ` : ''}
+
+            ${isWin95 ? `
+              <!-- Win95 Desktop Dialog Header -->
+              <div class="win95-box p-1 mb-6 flex justify-between items-center text-xs font-bold">
+                <div class="flex items-center gap-1.5 px-1 text-white bg-blue-900 w-full py-0.5">
+                  <i class="fa-solid fa-window-maximize"></i>
+                  <span>APPAREL_CATALOG_1995.EXE</span>
+                </div>
+                <div class="flex gap-1 ml-2">
+                  <button class="win95-btn px-1.5 text-[10px]">_</button>
+                  <button class="win95-btn px-1.5 text-[10px]">X</button>
+                </div>
+              </div>
+            ` : ''}
+
+            ${isNewspaper ? `
+              <!-- Newspaper Double Rules -->
+              <div class="newspaper-rule my-4"></div>
+              <div class="flex justify-between items-center py-1 text-xs border-b border-stone-800 uppercase tracking-widest font-mono">
+                <span>CIRCULATION: 45,000 COPIES</span>
+                <span>REGISTERED AT GENERAL POST OFFICE</span>
+                <span>PRICE: TWO PENCE</span>
+              </div>
+            ` : ''}
+
+            <div class="max-w-3xl">
+              <span class="inline-block text-xs font-mono uppercase tracking-widest px-3 py-1 rounded mb-4 font-bold"
+                    style="background-color: ${era.colors.accent}20; color: ${era.colors.accent}; border: 1px solid ${era.colors.accent}55;">
+                <i class="fa-solid fa-compass mr-1"></i> ${era.name}
+              </span>
+
+              <h2 class="text-4xl sm:text-6xl md:text-7xl font-black leading-none mb-6 uppercase tracking-tight"
+                  style="font-family: ${era.fonts.header}; color: ${era.colors.text};">
+                ${era.heroTitle}
+              </h2>
+
+              <p class="text-base sm:text-xl opacity-85 max-w-2xl leading-relaxed mb-8"
+                 style="color: ${era.colors.text};">
+                ${era.heroSubtitle}
+              </p>
+
+              <!-- Hero Call to Action Buttons -->
+              <div class="flex flex-wrap items-center gap-4">
+                <a href="#catalog-grid" class="px-6 py-3.5 rounded font-bold uppercase tracking-wider text-xs flex items-center gap-2 transition duration-200 transform hover:-translate-y-0.5 shadow-lg"
+                   style="background-color: ${era.colors.accent}; color: #ffffff;">
+                  <i class="fa-solid fa-bag-shopping"></i> Explore Garments
+                </a>
+                <button onclick="toggleInfoDrawer()" class="px-6 py-3.5 rounded font-bold uppercase tracking-wider text-xs flex items-center gap-2 border transition duration-200"
+                        style="border-color: ${era.colors.text}44; color: ${era.colors.text}; background: ${era.colors.text}08;">
+                  <i class="fa-solid fa-palette"></i> Palette & Typography
+                </button>
+              </div>
+            </div>
+
+            ${isGothic ? `
+              <!-- Gothic Ornate Flourish Divider -->
+              <div class="text-center my-8 text-2xl opacity-60 font-serif" style="color: ${era.colors.secondary};">
+                ❦ ❦ ❦ 𝕬𝖗𝖈𝖍𝖎𝖛𝖊 𝕭𝖊𝖘𝖕𝖔𝖐𝖊 ❦ ❦ ❦
+              </div>
+            ` : ''}
+          </section>
+
+          <!-- INTERACTIVE CATALOG ARCHIVE GRID -->
+          <section id="catalog-grid" class="max-w-7xl mx-auto px-4 sm:px-8 py-10 sm:py-16 border-t" 
+                   style="border-color: ${era.colors.text}18;">
+            
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-10 gap-4">
+              <div>
+                <p class="text-xs font-mono uppercase tracking-widest font-bold" style="color: ${era.colors.accent};">
+                  EXHIBIT PIECES
+                </p>
+                <h3 class="text-2xl sm:text-4xl font-extrabold uppercase tracking-tight" 
+                    style="font-family: ${era.fonts.header};">
+                  Physical Specimens
+                </h3>
+              </div>
+              <p class="text-xs font-mono opacity-60">
+                CLICK ITEM TO INSPECT CUT & WEAVE
+              </p>
+            </div>
+
+            <!-- Product Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+              ${era.products.map((prod, pIdx) => `
+                <div class="group relative rounded-lg border p-6 flex flex-col justify-between transition-all duration-300 hover:shadow-2xl ${isWin95 ? 'win95-box' : ''}"
+                     style="background-color: ${isWin95 ? '#c3c3c3' : (isDark ? 'rgba(255,255,255,0.03)' : 'rgba(0,0,0,0.02)')}; 
+                            border-color: ${era.colors.text}25;">
+                  
+                  <div>
+                    <!-- Badge / Sticker -->
+                    <div class="flex justify-between items-start mb-4">
+                      <span class="text-[10px] font-mono font-black uppercase px-2.5 py-1 rounded shadow-sm"
+                            style="background-color: ${era.colors.secondary}; color: #000000;">
+                        ${prod.tag}
+                      </span>
+                      <span class="text-lg font-bold font-mono" style="color: ${era.colors.accent};">
+                        $${prod.price}.00
+                      </span>
+                    </div>
+
+                    <!-- Visual Icon Placeholder -->
+                    <div class="w-full h-44 rounded flex items-center justify-center my-4 transition-transform duration-300 group-hover:scale-102"
+                         style="background-color: ${isWin95 ? '#ffffff' : (isDark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.05)')}; border: 1px dashed ${era.colors.text}33;">
+                      <div class="text-center space-y-2">
+                        <i class="fa-solid ${prod.icon} text-5xl opacity-80 group-hover:rotate-6 transition-transform" style="color: ${era.colors.accent};"></i>
+                        <p class="text-[10px] font-mono opacity-50 uppercase tracking-widest">ARCHIVE ${era.decade}</p>
+                      </div>
+                    </div>
+
+                    <h4 class="text-lg font-bold tracking-tight mb-2 uppercase"
+                        style="font-family: ${era.fonts.header}; color: ${era.colors.text};">
+                      ${prod.name}
+                    </h4>
+
+                    <p class="text-xs opacity-75 leading-relaxed mb-6" style="color: ${era.colors.text};">
+                      ${prod.desc}
+                    </p>
+                  </div>
+
+                  <!-- Actions -->
+                  <div class="flex items-center gap-2 pt-4 border-t" style="border-color: ${era.colors.text}15;">
+                    <button onclick="addToArchiveCart(${idx}, ${pIdx})" 
+                            class="flex-1 py-2.5 px-3 rounded font-bold uppercase text-[11px] tracking-wider transition duration-150 flex items-center justify-center gap-1.5 shadow"
+                            style="background-color: ${era.colors.accent}; color: #ffffff;">
+                      <i class="fa-solid fa-plus"></i> Archive Piece
+                    </button>
+                    <button onclick="openProductQuickView(${idx}, ${pIdx})" 
+                            class="p-2.5 rounded border transition duration-150"
+                            title="Inspect Details"
+                            style="border-color: ${era.colors.text}44; color: ${era.colors.text};">
+                      <i class="fa-regular fa-eye"></i>
+                    </button>
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          </section>
+
+          <!-- ERA MOOD BOARD & MANIFESTO FOOTER -->
+          <footer class="border-t py-12 px-4 sm:px-8 mt-12" style="border-color: ${era.colors.text}22;">
+            <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6 text-xs font-mono opacity-80">
+              <div class="space-y-1 text-center md:text-left">
+                <p class="font-bold uppercase tracking-wider">${era.name} Archive Preservation Series</p>
+                <p class="opacity-70">Curated with historical textiles, silhouettes & authentic layout semantics.</p>
+              </div>
+
+              <div class="flex flex-wrap items-center justify-center gap-3">
+                <button onclick="selectEra(${(currentEraIndex - 1 + vintageThemes.length) % vintageThemes.length})" class="px-3 py-1.5 rounded border hover:opacity-100 transition" style="border-color: ${era.colors.text}44;">
+                  ← Prev Era
+                </button>
+                <span class="px-2 font-bold">${(currentEraIndex + 1)} / ${vintageThemes.length}</span>
+                <button onclick="selectEra(${(currentEraIndex + 1) % vintageThemes.length})" class="px-3 py-1.5 rounded border hover:opacity-100 transition" style="border-color: ${era.colors.text}44;">
+                  Next Era →
+                </button>
+              </div>
+            </div>
+          </footer>
+        </div>
+      `;
+
+      root.innerHTML = html;
+    }
+
+    /* Update Info Drawer / Spec Sheet */
+    function updateSpecSheet(idx) {
+      const era = vintageThemes[idx];
+      document.getElementById('spec-era-badge').innerText = `ERA #${(idx+1).toString().padStart(2, '0')}`;
+      document.getElementById('spec-era-title').innerText = `${era.name} (${era.decade})`;
+      document.getElementById('spec-era-vibe').innerText = era.vibe;
+      document.getElementById('spec-era-fonts').innerText = `${era.fonts.header} + ${era.fonts.body}`;
+
+      const swatches = document.getElementById('spec-swatches');
+      swatches.innerHTML = `
+        <div class="p-2 rounded border border-zinc-800 text-center" style="background-color: ${era.colors.bg};">
+          <span class="text-[9px] font-bold px-1 rounded bg-black/70 text-white">${era.colors.bg}</span>
+          <p class="text-[9px] text-zinc-400 mt-1">Background</p>
+        </div>
+        <div class="p-2 rounded border border-zinc-800 text-center" style="background-color: ${era.colors.text};">
+          <span class="text-[9px] font-bold px-1 rounded bg-black/70 text-white">${era.colors.text}</span>
+          <p class="text-[9px] text-zinc-400 mt-1">Primary Text</p>
+        </div>
+        <div class="p-2 rounded border border-zinc-800 text-center" style="background-color: ${era.colors.accent};">
+          <span class="text-[9px] font-bold px-1 rounded bg-black/70 text-white">${era.colors.accent}</span>
+          <p class="text-[9px] text-zinc-400 mt-1">Accent Brand</p>
+        </div>
+        <div class="p-2 rounded border border-zinc-800 text-center" style="background-color: ${era.colors.secondary};">
+          <span class="text-[9px] font-bold px-1 rounded bg-black/70 text-white">${era.colors.secondary}</span>
+          <p class="text-[9px] text-zinc-400 mt-1">Secondary Tag</p>
+        </div>
+      `;
+    }
+
+    function toggleInfoDrawer() {
+      playVintageSfx('click');
+      const drawer = document.getElementById('spec-sheet');
+      const isClosed = drawer.classList.contains('-translate-y-[150%]');
+      if (isClosed) {
+        updateSpecSheet(currentEraIndex);
+        drawer.classList.remove('-translate-y-[150%]');
+      } else {
+        drawer.classList.add('-translate-y-[150%]');
+      }
+    }
+
+    function copyCurrentPalette() {
+      const era = vintageThemes[currentEraIndex];
+      const text = `ERA: ${era.name}\nBG: ${era.colors.bg}\nTEXT: ${era.colors.text}\nACCENT: ${era.colors.accent}\nSECONDARY: ${era.colors.secondary}\nFONTS: ${era.fonts.header} / ${era.fonts.body}`;
+      
+      const textArea = document.createElement("textarea");
+      textArea.value = text;
+      document.body.appendChild(textArea);
+      textArea.select();
+      try {
+        document.execCommand('copy');
+        playVintageSfx('cart');
+        alert("HEX Palette & Spec Copied to Clipboard!");
+      } catch (err) {
+        console.error('Copy error', err);
+      }
+      document.body.removeChild(textArea);
+    }
+
+    /* Archive Cart Logic */
+    function addToArchiveCart(eraIdx, prodIdx) {
+      playVintageSfx('cart');
+      const item = vintageThemes[eraIdx].products[prodIdx];
+      const eraName = vintageThemes[eraIdx].short;
+
+      archivedCart.push({
+        ...item,
+        era: eraName,
+        id: Date.now() + Math.random()
+      });
+
+      renderCartDrawer();
+      openCartDrawer();
+    }
+
+    function removeCartItem(uniqueId) {
+      playVintageSfx('click');
+      archivedCart = archivedCart.filter(item => item.id !== uniqueId);
+      renderCartDrawer();
+    }
+
+    function renderCartDrawer() {
+      const list = document.getElementById('cart-items-list');
+      const counter = document.getElementById('cart-counter');
+      const drawerCount = document.getElementById('drawer-cart-count');
+      const totalEl = document.getElementById('cart-total-price');
+
+      counter.innerText = archivedCart.length;
+      drawerCount.innerText = archivedCart.length;
+
+      if (archivedCart.length === 0) {
+        list.innerHTML = `
+          <div class="text-center text-zinc-500 py-16">
+            <i class="fa-solid fa-shirt text-3xl mb-3 opacity-30"></i>
+            <p>No specimens archived yet.</p>
+            <p class="text-[10px] text-zinc-600 mt-1">Explore any era and click "Archive Piece".</p>
+          </div>
+        `;
+        totalEl.innerText = "$0.00";
+        return;
+      }
+
+      let total = 0;
+      list.innerHTML = archivedCart.map(item => {
+        total += item.price;
+        return `
+          <div class="p-3 bg-zinc-900 border border-zinc-800 rounded flex items-center justify-between gap-3">
+            <div class="flex items-center gap-3">
+              <i class="fa-solid ${item.icon} text-amber-400 text-base"></i>
+              <div>
+                <p class="font-bold text-white leading-tight">${item.name}</p>
+                <p class="text-[10px] text-zinc-400 uppercase tracking-widest">${item.era} • $${item.price}</p>
+              </div>
+            </div>
+            <button onclick="removeCartItem(${item.id})" class="text-zinc-500 hover:text-red-400 p-1">
+              <i class="fa-solid fa-trash-can"></i>
+            </button>
+          </div>
+        `;
+      }).join('');
+
+      totalEl.innerText = `$${total.toFixed(2)}`;
+    }
+
+    function openCartDrawer() {
+      document.getElementById('cart-drawer').classList.remove('translate-x-full');
+    }
+    function closeCartDrawer() {
+      document.getElementById('cart-drawer').classList.add('translate-x-full');
+    }
+
+    function triggerCheckoutDemo() {
+      playVintageSfx('cart');
+      if (archivedCart.length === 0) {
+        alert("Your archive is currently empty.");
+        return;
+      }
+      alert(`Manifest generated for ${archivedCart.length} vintage garments. Total curation value: ${document.getElementById('cart-total-price').innerText}`);
+    }
+
+    /* Quick View Inspection Modal */
+    function openProductQuickView(eraIdx, prodIdx) {
+      playVintageSfx('click');
+      const era = vintageThemes[eraIdx];
+      const prod = era.products[prodIdx];
+
+      const modalContainer = document.getElementById('modal-container');
+      modalContainer.innerHTML = `
+        <button onclick="closeQuickModal()" class="absolute top-4 right-4 text-zinc-400 hover:text-white p-2">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+
+        <div class="flex flex-col sm:flex-row gap-6 items-center">
+          <div class="w-full sm:w-1/2 h-56 rounded bg-zinc-950 border border-zinc-800 flex flex-col items-center justify-center p-6 text-center">
+            <i class="fa-solid ${prod.icon} text-6xl text-amber-400 mb-3"></i>
+            <span class="text-[10px] font-mono uppercase bg-amber-400/20 text-amber-300 px-2 py-0.5 rounded">${prod.tag}</span>
+          </div>
+
+          <div class="w-full sm:w-1/2 space-y-3 font-mono">
+            <div class="text-[11px] text-zinc-400 uppercase tracking-widest">${era.name} (${era.decade})</div>
+            <h3 class="text-2xl font-bold text-white tracking-wide">${prod.name}</h3>
+            <p class="text-xl font-bold text-emerald-400">$${prod.price}.00 USD</p>
+            <p class="text-xs text-zinc-300 leading-relaxed font-sans">${prod.desc}</p>
+            
+            <div class="pt-4 border-t border-zinc-800 flex gap-2">
+              <button onclick="addToArchiveCart(${eraIdx}, ${prodIdx}); closeQuickModal();" 
+                      class="w-full py-2.5 rounded bg-amber-400 hover:bg-amber-300 text-black font-bold uppercase text-xs">
+                Add to Wardrobe Archive
+              </button>
+            </div>
+          </div>
+        </div>
+      `;
+
+      document.getElementById('quick-modal').classList.remove('hidden');
+    }
+
+    function closeQuickModal() {
+      document.getElementById('quick-modal').classList.add('hidden');
+    }
+
+    /* Close modal on backdrop click */
+    window.addEventListener('click', (e) => {
+      const modal = document.getElementById('quick-modal');
+      if (e.target === modal) closeQuickModal();
+    });
+
+    // Start on load
+    window.onload = function() {
+      initShowcase();
+    };
+  </script>
+</body>
+</html>
