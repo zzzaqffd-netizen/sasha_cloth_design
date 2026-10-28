@@ -3,121 +3,565 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vintage Archive</title>
-    <meta name="description" content="Fifteen vintage design directions from art nouveau to synthwave." />
+    <title>TONY Vintage Clothes</title>
+    <meta name="description" content="Luxury vintage streetwear landing page." />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:wght@600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="styles.css" />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;800;900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.cdnfonts.com/css/bilgres" rel="stylesheet" />
+    <style>
+      :root {
+        --bg: #eae0d0;
+        --card: #f3efe7;
+        --ink: #18181a;
+        --mute: #4a443f;
+        --pink: #f3bfd3;
+        --green: #c8e26d;
+        --line: rgba(24, 24, 26, 0.95);
+        --shadow: rgba(24, 24, 26, 0.14);
+      }
+
+      * { box-sizing: border-box; }
+
+      html, body {
+        margin: 0;
+        min-height: 100%;
+        font-family: 'DM Sans', sans-serif;
+        background: var(--bg);
+        color: var(--ink);
+      }
+
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 42px 18px;
+      }
+
+      .page-shell {
+        width: min(1280px, 100%);
+        min-height: 820px;
+        background: rgba(255,255,255,0.14);
+        border: 4px solid var(--line);
+        border-radius: 26px;
+        padding: 18px 28px 18px;
+        position: relative;
+        box-shadow: 0 0 0 8px rgba(255,255,255,0.08);
+      }
+
+      .topbar {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        padding: 8px 10px 0;
+      }
+
+      .brand {
+        font-weight: 800;
+        font-size: 1.2rem;
+        letter-spacing: 0.02em;
+      }
+
+      .nav {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: clamp(18px, 2vw, 32px);
+        font-size: 0.96rem;
+        font-weight: 700;
+      }
+
+      .nav a {
+        color: var(--ink);
+        text-decoration: none;
+      }
+
+      .nav a:hover { opacity: 0.72; }
+
+      .icons {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        font-size: 1.3rem;
+      }
+
+      .icon {
+        display: inline-block;
+        position: relative;
+        width: 18px;
+        height: 18px;
+      }
+
+      .icon.search::before {
+        content: "";
+        position: absolute;
+        width: 12px;
+        height: 12px;
+        border: 2px solid var(--ink);
+        border-radius: 50%;
+        left: 0;
+        top: 0;
+      }
+
+      .icon.search::after {
+        content: "";
+        position: absolute;
+        width: 8px;
+        height: 2px;
+        background: var(--ink);
+        border-radius: 2px;
+        right: -1px;
+        bottom: 1px;
+        transform: rotate(42deg);
+      }
+
+      .icon.bag::before {
+        content: "";
+        position: absolute;
+        width: 11px;
+        height: 10px;
+        border: 2px solid var(--ink);
+        border-top: none;
+        border-radius: 0 0 5px 5px;
+        inset: 6px 2px auto 2px;
+      }
+
+      .icon.bag::after {
+        content: "";
+        position: absolute;
+        width: 12px;
+        height: 8px;
+        border: 2px solid var(--ink);
+        border-bottom: none;
+        border-radius: 10px 10px 0 0;
+        left: 2px;
+        top: 2px;
+      }
+
+      .icon.heart::before,
+      .icon.heart::after {
+        content: "";
+        position: absolute;
+        width: 8px;
+        height: 12px;
+        background: var(--ink);
+        border-radius: 8px 8px 0 0;
+        top: 4px;
+        left: 4px;
+        transform: rotate(-45deg);
+        transform-origin: bottom left;
+      }
+
+      .icon.heart::after {
+        left: 10px;
+        transform: rotate(45deg);
+        transform-origin: bottom right;
+      }
+
+      .hero {
+        position: relative;
+        padding-top: 18px;
+      }
+
+      .hero-row {
+        display: grid;
+        grid-template-columns: 1.15fr 1.6fr 0.8fr;
+        align-items: center;
+        gap: 16px;
+      }
+
+      .tag-card {
+        width: 100%;
+        max-width: 320px;
+        min-height: 88px;
+        border-radius: 32px;
+        background: var(--pink);
+        border: 3px solid var(--line);
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 0 0 5px rgba(255,255,255,0.14);
+      }
+
+      .tag-card::before,
+      .tag-card::after {
+        content: "";
+        position: absolute;
+        border: 2px solid rgba(24,24,26,0.8);
+        border-radius: 50%;
+      }
+
+      .tag-card::before {
+        width: 150px;
+        height: 90px;
+        left: 18px;
+        top: -18px;
+      }
+
+      .tag-card::after {
+        width: 160px;
+        height: 90px;
+        right: 8px;
+        bottom: -16px;
+      }
+
+      .headline-wrap {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 22px;
+        min-height: 112px;
+      }
+
+      .headline {
+        font-family: 'Bilgres', 'Arial Black', sans-serif;
+        font-size: clamp(3.2rem, 5vw, 7.6rem);
+        line-height: 0.83;
+        letter-spacing: -0.08em;
+        text-transform: uppercase;
+        margin: 0;
+      }
+
+      .headline span {
+        display: block;
+      }
+
+      .pill-btn {
+        width: 170px;
+        height: 72px;
+        border-radius: 28px;
+        background: linear-gradient(180deg, #c8e26d 0%, #bfe166 100%);
+        border: 3px solid var(--line);
+        position: relative;
+        box-shadow: 0 6px 0 rgba(24,24,26,0.08);
+      }
+
+      .pill-btn::before {
+        content: "";
+        position: absolute;
+        width: 54px;
+        height: 3px;
+        background: var(--ink);
+        right: 23px;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+
+      .pill-btn::after {
+        content: "";
+        position: absolute;
+        width: 14px;
+        height: 14px;
+        border-top: 3px solid var(--ink);
+        border-right: 3px solid var(--ink);
+        transform: rotate(45deg) translateY(-50%);
+        right: 16px;
+        top: 50%;
+      }
+
+      .subhead {
+        display: grid;
+        grid-template-columns: 1.6fr 1fr;
+        align-items: end;
+        gap: 30px;
+        margin-top: 18px;
+        padding: 0 6px;
+      }
+
+      .dream-box {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .dream-box .frame {
+        min-width: min(100%, 560px);
+        padding: 14px 20px 10px;
+        border: 3px solid var(--line);
+        border-radius: 26px;
+        background: rgba(255,255,255,0.08);
+      }
+
+      .dream-box h2 {
+        margin: 0;
+        font-family: 'Bilgres', 'Arial Black', sans-serif;
+        font-size: clamp(3rem, 5.5vw, 7rem);
+        letter-spacing: -0.08em;
+        line-height: 0.82;
+        text-transform: uppercase;
+      }
+
+      .promo-copy {
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        min-height: 110px;
+      }
+
+      .promo-copy p {
+        margin: 0;
+        max-width: 285px;
+        font-size: 0.92rem;
+        line-height: 1.45;
+        font-weight: 500;
+      }
+
+      .feature-row {
+        display: grid;
+        grid-template-columns: 1.2fr 0.66fr 1.2fr;
+        align-items: end;
+        gap: 18px;
+        margin-top: 18px;
+      }
+
+      .portrait {
+        position: relative;
+        min-height: 420px;
+        overflow: hidden;
+        border-radius: 18px 18px 0 0;
+      }
+
+      .portrait.left {
+        background: linear-gradient(180deg, rgba(204,232,111,0.9), rgba(172,214,90,0.85));
+        clip-path: polygon(0 10%, 100% 0, 100% 100%, 0 100%);
+      }
+
+      .portrait.right {
+        background: linear-gradient(180deg, rgba(245,190,214,0.88), rgba(245,190,214,0.88));
+      }
+
+      .person {
+        position: absolute;
+        inset: auto 0 0 0;
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+        filter: saturate(1.15) contrast(1.06);
+      }
+
+      .portrait.left .person {
+        object-position: center top;
+      }
+
+      .portrait.right .person {
+        object-position: center top;
+      }
+
+      .promo-card {
+        position: relative;
+        min-height: 330px;
+        display: flex;
+        align-items: end;
+        justify-content: center;
+      }
+
+      .promo-box {
+        position: relative;
+        width: 300px;
+        min-height: 250px;
+        background: rgba(255,255,255,0.18);
+        border: 3px solid var(--line);
+        border-radius: 24px;
+        text-align: center;
+        padding: 18px 16px 16px;
+        box-shadow: 0 8px 0 rgba(24,24,26,0.08);
+      }
+
+      .promo-box::before {
+        content: "";
+        position: absolute;
+        left: 50%;
+        top: -30px;
+        width: 72px;
+        height: 72px;
+        transform: translateX(-50%) rotate(45deg);
+        background: rgba(255,255,255,0.1);
+        border-top: 3px solid var(--line);
+        border-left: 3px solid var(--line);
+      }
+
+      .promo-box .small-tag {
+        display: inline-block;
+        margin-top: 10px;
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        padding: 6px 10px;
+        background: rgba(255,255,255,0.12);
+        border-radius: 999px;
+      }
+
+      .promo-box h3 {
+        margin: 16px 0 10px;
+        font-family: 'Bilgres', 'Arial Black', sans-serif;
+        font-size: clamp(1.7rem, 2.3vw, 3rem);
+        letter-spacing: -0.05em;
+        line-height: 0.9;
+      }
+
+      .promo-box p {
+        margin: 0 auto;
+        max-width: 220px;
+        font-size: 0.8rem;
+        line-height: 1.5;
+      }
+
+      .promo-box .arrow {
+        width: 56px;
+        height: 56px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border: 3px solid var(--line);
+        border-radius: 50%;
+        margin-top: 18px;
+        background: rgba(255,255,255,0.24);
+        font-size: 2rem;
+        line-height: 1;
+      }
+
+      .spark {
+        position: absolute;
+        width: 124px;
+        height: 124px;
+        right: -10px;
+        top: 8px;
+        transform: rotate(16deg);
+        pointer-events: none;
+      }
+
+      .spark::before,
+      .spark::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 3px;
+        height: 100%;
+        background: var(--ink);
+        transform: translate(-50%, -50%) rotate(45deg);
+      }
+
+      .spark::after {
+        transform: translate(-50%, -50%) rotate(-45deg);
+      }
+
+      .spark span::before,
+      .spark span::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 3px;
+        height: 100%;
+        background: var(--ink);
+        transform: translate(-50%, -50%) rotate(90deg);
+      }
+
+      .spark span::after {
+        transform: translate(-50%, -50%) rotate(135deg);
+      }
+
+      @media (max-width: 980px) {
+        .topbar { flex-wrap: wrap; }
+        .nav { order: 3; width: 100%; justify-content: flex-start; overflow-x: auto; }
+        .hero-row,
+        .subhead,
+        .feature-row {
+          grid-template-columns: 1fr;
+        }
+        .tag-card {
+          max-width: 220px;
+        }
+        .dream-box .frame {
+          width: 100%;
+        }
+      }
+
+      @media (max-width: 620px) {
+        body { padding: 18px 10px; }
+        .page-shell { padding: 12px 14px 16px; }
+        .topbar { gap: 10px; }
+        .nav { gap: 12px; font-size: 0.82rem; }
+        .headline-wrap { display: block; }
+        .headline { text-align: center; }
+        .pill-btn { margin: 12px auto 0; }
+        .portrait { min-height: 300px; }
+      }
+    </style>
   </head>
-  <body class="home-body">
-    <header class="site-header">
-      <div class="container nav-wrap">
-        <a href="index.html" class="brand">Vintage Archive</a>
-        <nav class="top-nav">
-          <a href="#gallery">Designs</a>
-          <a href="#about">About</a>
-          <a href="#contact">Contact</a>
+  <body>
+    <div class="page-shell">
+      <header class="topbar">
+        <div class="brand">TONY.</div>
+        <nav class="nav" aria-label="Main navigation">
+          <a href="#">New Arrivals</a>
+          <a href="#">Men</a>
+          <a href="#">Women</a>
+          <a href="#">About Us</a>
+          <a href="#">Sale</a>
         </nav>
-      </div>
-    </header>
+        <div class="icons" aria-label="Utilities">
+          <span class="icon search" aria-hidden="true"></span>
+          <span class="icon heart" aria-hidden="true"></span>
+          <span class="icon bag" aria-hidden="true"></span>
+        </div>
+      </header>
 
-    <main>
-      <section class="hero">
-        <div class="container hero-grid">
-          <div>
-            <span class="eyebrow">Curated fashion worlds</span>
-            <h1>All vintage design stories, kept intact, with 15 new directions added.</h1>
-            <p>
-              From 1890s art nouveau to 2020s hyperpop, each direction captures a unique mood,
-              silhouette, and visual language for a distinct fashion identity.
-            </p>
-            <div class="hero-actions">
-              <a class="button primary" href="#gallery">View all 30</a>
-              <a class="button ghost" href="#about">Explore the concept</a>
+      <main class="hero">
+        <div class="hero-row">
+          <div class="tag-card" aria-hidden="true"></div>
+
+          <div class="headline-wrap">
+            <h1 class="headline">
+              <span>Vintage</span>
+              <span>Clothes</span>
+            </h1>
+          </div>
+
+          <div class="pill-btn" aria-hidden="true"></div>
+        </div>
+
+        <div class="subhead">
+          <div class="dream-box">
+            <div class="frame">
+              <h2>Of Your<br>Dream</h2>
+            </div>
+          </div>
+          <div class="promo-copy">
+            <p>Shop fresh designer drops and exclusive products at TONY! Discover the latest and the most hyped brands</p>
+          </div>
+        </div>
+
+        <div class="feature-row">
+          <div class="portrait left">
+            <img
+              class="person"
+              src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=900&q=80"
+              alt="Model in red outfit"
+            />
+          </div>
+
+          <div class="promo-card">
+            <div class="spark"><span></span></div>
+            <div class="promo-box">
+              <div class="small-tag">#SPINGSUMMER2022</div>
+              <h3>TONY.</h3>
+              <p>10% Student Discount on summer clothes with promo code STUDENT10</p>
+              <div class="arrow">↓</div>
             </div>
           </div>
 
-          <div class="hero-panel">
-            <div class="panel-card">
-              <span class="mini-tag">Archive no. 01</span>
-              <h3>Art Nouveau / 1890s</h3>
-              <p>Botanical romance, gold filigree, velvet drama.</p>
-            </div>
+          <div class="portrait right">
+            <img
+              class="person"
+              src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=900&q=80"
+              alt="Model in leather jacket"
+            />
           </div>
         </div>
-      </section>
-
-      <section id="gallery" class="section">
-        <div class="container">
-          <div class="section-heading">
-            <span class="eyebrow">Archive collection</span>
-            <h2>Vintage design directions</h2>
-          </div>
-
-          <div class="design-grid">
-            <a class="design-card" href="designs/1890s-art-nouveau.html"><span class="card-label">1890s</span><h3>Art Nouveau</h3><p>Botanical romance and golden curves.</p></a>
-            <a class="design-card" href="designs/1900s-edwardian.html"><span class="card-label">1900s</span><h3>Edwardian</h3><p>Refined glamour and tailored elegance.</p></a>
-            <a class="design-card" href="designs/1910s-utility.html"><span class="card-label">1910s</span><h3>WWI Utility</h3><p>Practical, disciplined, and durable.</p></a>
-            <a class="design-card" href="designs/1920s-bauhaus.html"><span class="card-label">1920s</span><h3>Bauhaus Modern</h3><p>Geometry, structure, disciplined form.</p></a>
-            <a class="design-card" href="designs/1920s-constructivism.html"><span class="card-label">1920s</span><h3>Constructivism</h3><p>Agitprop color and industrial rhythm.</p></a>
-            <a class="design-card" href="designs/1930s-broadsheet.html"><span class="card-label">1930s</span><h3>Broadsheet</h3><p>Newspaper print and classic utility.</p></a>
-            <a class="design-card" href="designs/1930s-deco.html"><span class="card-label">1930s</span><h3>Art Deco</h3><p>Golden lines and city luxury.</p></a>
-            <a class="design-card" href="designs/1940s-workwear.html"><span class="card-label">1940s</span><h3>Workwear</h3><p>Waxed cotton and honest craftsmanship.</p></a>
-            <a class="design-card" href="designs/1940s-noir.html"><span class="card-label">1940s</span><h3>Noir Studio</h3><p>Fitted drama and cinematic noir.</p></a>
-            <a class="design-card" href="designs/1950s-palm-springs.html"><span class="card-label">1950s</span><h3>Palm Springs</h3><p>Pastel leisure and desert glamour.</p></a>
-            <a class="design-card" href="designs/1950s-rockabilly.html"><span class="card-label">1950s</span><h3>Rockabilly</h3><p>Hot rods, denim, and diner charm.</p></a>
-            <a class="design-card" href="designs/1950s-americana.html"><span class="card-label">1950s</span><h3>Americana</h3><p>Golden road trips and classic tailoring.</p></a>
-            <a class="design-card" href="designs/1960s-carnaby.html"><span class="card-label">1960s</span><h3>Carnaby Mod</h3><p>Pop art, sharp lines, youthful energy.</p></a>
-            <a class="design-card" href="designs/1960s-riviera.html"><span class="card-label">1960s</span><h3>French Riviera</h3><p>Sunlit tailoring and coastal ease.</p></a>
-            <a class="design-card" href="designs/1960s-hippie.html"><span class="card-label">1960s</span><h3>Hippie Folk</h3><p>Earth tones and freeform bohemian softness.</p></a>
-            <a class="design-card" href="designs/1970s-disco.html"><span class="card-label">1970s</span><h3>Soul & Disco</h3><p>Velvet warmth and after-hours rhythm.</p></a>
-            <a class="design-card" href="designs/1970s-punk.html"><span class="card-label">1977</span><h3>Punk Fanzine</h3><p>Chaotic rebellion and safety-pin edge.</p></a>
-            <a class="design-card" href="designs/1970s-desert-disco.html"><span class="card-label">1970s</span><h3>Desert Disco</h3><p>Sunset glam and desert heat.</p></a>
-            <a class="design-card" href="designs/1980s-miami-vice.html"><span class="card-label">1980s</span><h3>Miami Vice</h3><p>Pastel power and coastal sheen.</p></a>
-            <a class="design-card" href="designs/1980s-synthwave.html"><span class="card-label">1980s</span><h3>Synthwave</h3><p>Neon horizon and arcade energy.</p></a>
-            <a class="design-card" href="designs/1980s-streetwear.html"><span class="card-label">1980s</span><h3>Streetwear</h3><p>Graphic pop and utility-led styling.</p></a>
-            <a class="design-card" href="designs/1990s-grunge.html"><span class="card-label">1990s</span><h3>Grunge</h3><p>Skate roughness and cassette textures.</p></a>
-            <a class="design-card" href="designs/1990s-minimal.html"><span class="card-label">1990s</span><h3>Minimalism</h3><p>Clean form and quiet luxury.</p></a>
-            <a class="design-card" href="designs/2000s-indie-sleaze.html"><span class="card-label">2000s</span><h3>Indie Sleaze</h3><p>Low-fi glamour and nightlife haze.</p></a>
-            <a class="design-card" href="designs/2000s-y2k.html"><span class="card-label">2000s</span><h3>Y2K Glow</h3><p>Metallic shine and digital optimism.</p></a>
-            <a class="design-card" href="designs/2010s-luxury.html"><span class="card-label">2010s</span><h3>Minimal Luxury</h3><p>Quiet opulence and structured essentials.</p></a>
-            <a class="design-card" href="designs/2010s-nordic.html"><span class="card-label">2010s</span><h3>Nordic Minimal</h3><p>Scandinavian restraint and clean lines.</p></a>
-            <a class="design-card" href="designs/2020s-quiet-luxury.html"><span class="card-label">2020s</span><h3>Quiet Luxury</h3><p>Understated elegance and refined texture.</p></a>
-            <a class="design-card" href="designs/2020s-dark-academia.html"><span class="card-label">2020s</span><h3>Dark Academia</h3><p>Literary mood and tailored depth.</p></a>
-            <a class="design-card" href="designs/2020s-hyperpop.html"><span class="card-label">2020s</span><h3>Hyperpop</h3><p>Digital color burst and expressive excess.</p></a>
-          </div>
-        </div>
-      </section>
-
-      <section id="about" class="section section-alt">
-        <div class="container about-box">
-          <div>
-            <span class="eyebrow">Design system</span>
-            <h2>Every direction stays, and we keep adding new worlds.</h2>
-          </div>
-          <p>
-            This archive preserves the original vintage journey while expanding with fifteen additional fashion worlds, creating a broader and richer visual library.
-          </p>
-        </div>
-      </section>
-
-      <section id="contact" class="section contact-section">
-        <div class="container contact-box">
-          <div>
-            <span class="eyebrow">Contact</span>
-            <h2>Ready to build a wardrobe story?</h2>
-          </div>
-          <a class="button primary" href="mailto:hello@vintagearchive.example">hello@vintagearchive.example</a>
-        </div>
-      </section>
-    </main>
-
-    <footer class="site-footer">
-      <div class="container footer-row">
-        <span>Vintage Archive</span>
-        <span>30 fashion directions total</span>
-      </div>
-    </footer>
+      </main>
+    </div>
   </body>
 </html>
