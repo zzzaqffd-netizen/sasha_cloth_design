@@ -4,31 +4,661 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Streetwear — Vintage Archive</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;800;900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.cdnfonts.com/css/bilgres" rel="stylesheet" />
     <link rel="stylesheet" href="../styles.css" />
     <style>
-      body {
-        --bg: #eeeeee; --bg-soft: #d8d8d8; --panel: rgba(25,25,25,0.03); --line: rgba(25,25,25,0.12); --text: #1a1a1a; --muted: #4c4c4c; --accent: #ef476f; --accent-2: #118ab2;
+      :root {
+        --bg: #e9e0d1;
+        --panel: #f3efe8;
+        --panel-soft: #efe5d9;
+        --ink: #171617;
+        --muted: #5e534b;
+        --pink: #f6bfd5;
+        --pink-2: #f7d6de;
+        --green: #c6e36c;
+        --green-2: #d4ef8c;
+        --cream: #f9f2eb;
+        --shadow: rgba(23, 22, 23, 0.16);
+        --line: rgba(23, 22, 23, 0.9);
       }
-      .site-header { background: rgba(238,238,238,0.8); }
+
+      * { box-sizing: border-box; }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background: var(--bg);
+        color: var(--ink);
+        font-family: 'DM Sans', sans-serif;
+      }
+
+      .site-header {
+        background: transparent;
+        border: none;
+        box-shadow: none;
+        position: static;
+      }
+
+      .nav-wrap {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 18px 24px 0;
+      }
+
+      .top-nav a {
+        font-size: 0.92rem;
+        color: var(--ink);
+        font-weight: 700;
+      }
+
+      .brand {
+        font-size: 1.2rem;
+        font-weight: 800;
+        letter-spacing: 0.02em;
+      }
+
+      .design-page {
+        padding: 10px 20px 48px;
+      }
+
+      .page-shell {
+        max-width: 1280px;
+        margin: 0 auto;
+      }
+
+      .streetwear-stage {
+        position: relative;
+        background: rgba(255,255,255,0.18);
+        border: 4px solid var(--line);
+        border-radius: 18px;
+        box-shadow: 0 0 0 8px rgba(255,255,255,0.08);
+        padding: 8px 20px 28px;
+        overflow: hidden;
+      }
+
+      .streetwear-topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+        padding: 10px 24px 0;
+      }
+
+      .brand-mark {
+        font-weight: 800;
+        font-size: 1.1rem;
+        letter-spacing: 0.02em;
+      }
+
+      .top-nav-inline {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 30px;
+        flex: 1;
+        font-weight: 700;
+      }
+
+      .top-icons {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        font-size: 1.2rem;
+      }
+
+      .icon {
+        width: 18px;
+        height: 18px;
+        display: inline-block;
+        position: relative;
+      }
+
+      .icon.search::before {
+        content: "";
+        position: absolute;
+        width: 12px;
+        height: 12px;
+        border: 2px solid var(--ink);
+        border-radius: 50%;
+        left: 0;
+        top: 0;
+      }
+
+      .icon.search::after {
+        content: "";
+        position: absolute;
+        width: 7px;
+        height: 2px;
+        background: var(--ink);
+        transform: rotate(42deg);
+        right: -1px;
+        bottom: 0px;
+        border-radius: 2px;
+      }
+
+      .icon.bag::before {
+        content: "";
+        position: absolute;
+        left: 2px;
+        right: 2px;
+        top: 6px;
+        height: 9px;
+        border: 2px solid var(--ink);
+        border-top: 0;
+        border-radius: 0 0 4px 4px;
+      }
+
+      .icon.bag::after {
+        content: "";
+        position: absolute;
+        width: 10px;
+        height: 7px;
+        left: 4px;
+        top: 1px;
+        border: 2px solid var(--ink);
+        border-bottom: 0;
+        border-radius: 10px 10px 0 0;
+      }
+
+      .icon.heart::before,
+      .icon.heart::after {
+        content: "";
+        position: absolute;
+        width: 7px;
+        height: 11px;
+        background: var(--ink);
+        border-radius: 7px 7px 0 0;
+        top: 4px;
+        transform: rotate(-45deg);
+        transform-origin: bottom left;
+        left: 5px;
+      }
+
+      .icon.heart::after {
+        left: 10px;
+        transform: rotate(45deg);
+        transform-origin: bottom right;
+      }
+
+      .hero-row {
+        position: relative;
+        padding: 18px 12px 0;
+      }
+
+      .headline-wrap {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+        padding: 10px 16px 0;
+      }
+
+      .callout-box {
+        position: relative;
+        width: 270px;
+        min-height: 90px;
+        border-radius: 20px 20px 20px 20px;
+        background: var(--pink);
+        border: 3px solid var(--line);
+        box-shadow: 0 0 0 3px rgba(255,255,255,0.28);
+        overflow: hidden;
+      }
+
+      .callout-box::before,
+      .callout-box::after {
+        content: "";
+        position: absolute;
+        border: 2px solid rgba(23,22,23,0.7);
+        border-radius: 50%;
+      }
+
+      .callout-box::before {
+        width: 145px;
+        height: 80px;
+        left: 10px;
+        top: 12px;
+        border-color: rgba(23,22,23,0.75);
+      }
+
+      .callout-box::after {
+        width: 140px;
+        height: 70px;
+        right: 12px;
+        bottom: 8px;
+      }
+
+      .headline {
+        position: relative;
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 22px;
+      }
+
+      .headline h1 {
+        margin: 0;
+        font-family: 'Bilgres', 'Arial Black', sans-serif;
+        font-size: clamp(3.1rem, 5vw, 7rem);
+        line-height: 0.88;
+        letter-spacing: -0.06em;
+        text-transform: uppercase;
+        color: var(--ink);
+      }
+
+      .headline h1 strong {
+        display: block;
+      }
+
+      .headline-button {
+        width: 170px;
+        height: 72px;
+        border-radius: 24px;
+        border: 3px solid var(--line);
+        background: linear-gradient(180deg, var(--green) 0%, var(--green-2) 100%);
+        position: relative;
+        box-shadow: 6px 6px 0 rgba(23,22,23,0.08);
+      }
+
+      .headline-button::before {
+        content: "";
+        position: absolute;
+        width: 54px;
+        height: 3px;
+        background: var(--ink);
+        right: 26px;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+
+      .headline-button::after {
+        content: "";
+        position: absolute;
+        width: 14px;
+        height: 14px;
+        right: 18px;
+        top: 50%;
+        border-top: 3px solid var(--ink);
+        border-right: 3px solid var(--ink);
+        transform: translateY(-50%) rotate(45deg);
+      }
+
+      .subhead-row {
+        display: grid;
+        grid-template-columns: 1.2fr 1fr;
+        align-items: end;
+        gap: 22px;
+        padding: 10px 26px 0;
+      }
+
+      .dream-box {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 110px;
+      }
+
+      .dream-box .outer {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 12px 16px 8px;
+        border: 3px solid var(--line);
+        border-radius: 24px;
+        background: rgba(255,255,255,0.12);
+      }
+
+      .dream-box h2 {
+        margin: 0;
+        font-family: 'Bilgres', 'Arial Black', sans-serif;
+        font-size: clamp(2.2rem, 4.5vw, 6rem);
+        line-height: 0.8;
+        letter-spacing: -0.065em;
+        text-transform: uppercase;
+        color: var(--ink);
+      }
+
+      .promo-copy {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        color: var(--ink);
+        font-size: 0.95rem;
+        line-height: 1.4;
+        padding: 0 0 12px;
+      }
+
+      .promo-copy p {
+        margin: 0;
+        max-width: 270px;
+        font-weight: 500;
+      }
+
+      .feature-row {
+        position: relative;
+        display: grid;
+        grid-template-columns: 1.1fr 0.72fr 1.1fr;
+        align-items: end;
+        gap: 18px;
+        padding: 18px 18px 0;
+      }
+
+      .portrait {
+        position: relative;
+        min-height: 420px;
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+      }
+
+      .portrait.left {
+        background: linear-gradient(180deg, rgba(234,255,74,0.78), rgba(172,234,84,0.78));
+        clip-path: polygon(0 9%, 100% 0, 100% 100%, 0 100%);
+        border-radius: 18px 18px 0 0;
+        overflow: hidden;
+      }
+
+      .portrait.right {
+        background: linear-gradient(180deg, rgba(244,191,213,0.9), rgba(244,191,213,0.9));
+        border-radius: 22px 22px 0 0;
+        overflow: hidden;
+      }
+
+      .portrait .figure {
+        position: relative;
+        width: 82%;
+        height: 360px;
+        margin-bottom: 0;
+      }
+
+      .portrait.left .figure {
+        background: linear-gradient(180deg, rgba(17,15,18,0.0), rgba(17,15,18,0.08));
+      }
+
+      .portrait.left .figure::before {
+        content: "";
+        position: absolute;
+        left: 44%;
+        bottom: 0;
+        width: 145px;
+        height: 220px;
+        background: linear-gradient(180deg, #1180a2, #0d3c5e 100%);
+        border-radius: 38% 38% 12% 12%;
+        transform: translateX(-50%);
+        box-shadow: inset 0 0 0 10px rgba(255,255,255,0.1);
+      }
+
+      .portrait.left .figure::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        top: 44px;
+        width: 110px;
+        height: 120px;
+        background: linear-gradient(180deg, #2d3138 0%, #111827 80%);
+        border-radius: 44% 46% 45% 55% / 34% 38% 62% 66%;
+        transform: translateX(-50%);
+      }
+
+      .portrait.right .figure {
+        background: rgba(255,255,255,0.08);
+      }
+
+      .portrait.right .figure::before {
+        content: "";
+        position: absolute;
+        left: 48%;
+        bottom: 0;
+        width: 140px;
+        height: 190px;
+        background: linear-gradient(180deg, #2a2d32 0%, #0c0d12 100%);
+        border-radius: 25% 25% 14% 14%;
+        transform: translateX(-50%);
+      }
+
+      .portrait.right .figure::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        top: 34px;
+        width: 110px;
+        height: 120px;
+        background: linear-gradient(180deg, #aeadb1 0%, #fbfbfb 100%);
+        border-radius: 45% 55% 48% 52%;
+        transform: translateX(-50%);
+      }
+
+      .decor-squiggle {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 180px;
+        height: 180px;
+        transform: translate(-50%, -50%);
+        border: 3px solid var(--line);
+        border-left-color: transparent;
+        border-bottom-color: transparent;
+        border-radius: 50%;
+        opacity: 0.7;
+      }
+
+      .promo-card {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 320px;
+      }
+
+      .promo-card .inner {
+        width: 300px;
+        background: rgba(255,255,255,0.24);
+        border: 3px solid var(--line);
+        border-radius: 20px;
+        padding: 14px 18px 30px;
+        text-align: center;
+        position: relative;
+        box-shadow: 0 8px 0 rgba(23,22,23,0.08);
+      }
+
+      .promo-card .inner::before {
+        content: "";
+        position: absolute;
+        width: 80px;
+        height: 80px;
+        left: 50%;
+        top: -32px;
+        transform: translateX(-50%) rotate(45deg);
+        border-top: 3px solid var(--line);
+        border-left: 3px solid var(--line);
+        background: transparent;
+      }
+
+      .promo-card .inner .tag {
+        display: inline-block;
+        margin-top: 18px;
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        background: rgba(255,255,255,0.18);
+        padding: 6px 10px;
+        border-radius: 999px;
+      }
+
+      .promo-card .inner h3 {
+        margin: 16px 0 10px;
+        font-size: 2.2rem;
+        line-height: 0.95;
+        font-weight: 900;
+        letter-spacing: -0.05em;
+      }
+
+      .promo-card .inner p {
+        margin: 8px 0 0;
+        font-size: 0.82rem;
+        line-height: 1.5;
+        max-width: 200px;
+        margin-inline: auto;
+      }
+
+      .promo-card .inner .down {
+        width: 54px;
+        height: 54px;
+        border-radius: 50%;
+        border: 3px solid var(--line);
+        background: rgba(255,255,255,0.38);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 16px;
+        font-size: 1.8rem;
+        font-weight: 700;
+      }
+
+      .promo-card .spark {
+        position: absolute;
+        width: 110px;
+        height: 110px;
+        right: 12px;
+        top: 18px;
+        transform: rotate(15deg);
+      }
+
+      .promo-card .spark::before,
+      .promo-card .spark::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 3px;
+        height: 100%;
+        background: var(--line);
+        transform: translate(-50%, -50%) rotate(45deg);
+      }
+
+      .promo-card .spark::after {
+        transform: translate(-50%, -50%) rotate(-45deg);
+      }
+
+      .promo-card .spark span {
+        position: absolute;
+        inset: 0;
+      }
+
+      .promo-card .spark span::before,
+      .promo-card .spark span::after {
+        content: "";
+        position: absolute;
+        width: 3px;
+        height: 100%;
+        background: var(--line);
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%) rotate(90deg);
+      }
+
+      .promo-card .spark span::after {
+        transform: translate(-50%, -50%) rotate(45deg);
+      }
+
+      @media (max-width: 900px) {
+        .headline-wrap,
+        .subhead-row,
+        .feature-row {
+          grid-template-columns: 1fr;
+          display: grid;
+        }
+
+        .headline {
+          justify-content: flex-start;
+        }
+
+        .promo-copy {
+          justify-content: center;
+          text-align: center;
+        }
+
+        .streetwear-stage {
+          padding-bottom: 18px;
+        }
+      }
     </style>
   </head>
   <body>
     <header class="site-header">
       <div class="container nav-wrap">
-        <a href="../index.html" class="brand">Vintage Archive</a>
-        <nav class="top-nav"><a href="../index.html">Gallery</a><a href="../index.html#about">About</a></nav>
+        <a href="../index.html" class="brand">TONY.</a>
+        <nav class="top-nav">
+          <a href="../index.html">New Arrivals</a>
+          <a href="../index.html">Men</a>
+          <a href="../index.html">Women</a>
+          <a href="../index.html">About Us</a>
+          <a href="../index.html">Sale</a>
+        </nav>
       </div>
     </header>
+
     <main class="design-page">
       <div class="container page-shell">
-        <div class="page-top">
-          <div class="top-row"><span class="page-badge">1980s / Streetwear</span><a class="button ghost" href="../index.html">← Back to gallery</a></div>
-          <h1>Streetwear</h1>
-          <p>Graphic utility, oversized silhouettes, and athletic ease with a bold graphic voice.</p>
-        </div>
-        <div class="page-body">
-          <div class="story-block"><h3>Design direction</h3><p>Bold contrasts, relaxed cuts, and layered pieces create an urban statement rooted in sportswear and visual confidence.</p></div>
-          <aside class="palette-box"><h3>Palette</h3><div class="swatch-grid"><div class="swatch" style="background:#eeeeee;color:#1a1a1a;">Silver</div><div class="swatch" style="background:#ef476f;color:#fff;">Pink</div><div class="swatch" style="background:#118ab2;color:#fff;">Cyan</div><div class="swatch" style="background:#1a1a1a;color:#fff;">Black</div></div></aside>
+        <div class="streetwear-stage">
+          <div class="streetwear-topbar">
+            <div class="brand-mark">TONY.</div>
+            <nav class="top-nav-inline">
+              <span>New Arrivals</span>
+              <span>Men</span>
+              <span>Women</span>
+              <span>About Us</span>
+              <span>Sale</span>
+            </nav>
+            <div class="top-icons">
+              <span class="icon search" aria-label="Search"></span>
+              <span class="icon heart" aria-label="Wishlist"></span>
+              <span class="icon bag" aria-label="Bag"></span>
+            </div>
+          </div>
+
+          <div class="hero-row">
+            <div class="headline-wrap">
+              <div class="callout-box"></div>
+              <div class="headline">
+                <h1><strong>Vintage</strong> <strong>Clothes</strong></h1>
+                <div class="headline-button" aria-hidden="true"></div>
+              </div>
+            </div>
+
+            <div class="subhead-row">
+              <div class="dream-box">
+                <div class="outer"><h2>Of Your Dream</h2></div>
+              </div>
+              <div class="promo-copy">
+                <p>Shop fresh designer drops and exclusive products at TONY! Discover the latest and the most hyped brands</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="feature-row">
+            <div class="portrait left">
+              <div class="figure"></div>
+            </div>
+
+            <div class="promo-card">
+              <div class="spark"><span></span></div>
+              <div class="inner">
+                <div class="tag">#SPINGSUMMER2022</div>
+                <h3>TONY.</h3>
+                <p>10% Student Discount on summer clothes with promo code STUDENT10</p>
+                <div class="down">↓</div>
+              </div>
+            </div>
+
+            <div class="portrait right">
+              <div class="figure"></div>
+            </div>
+          </div>
         </div>
       </div>
     </main>
